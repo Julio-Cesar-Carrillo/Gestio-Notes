@@ -30,10 +30,12 @@
             <div class="formulario">
                 <form id="login" action="./procesos/validacion.php" method="post">
                     <h2>Iniciar Sesión</h2>
+                    <?php if (isset($_GET['error'])) { ?>
+                    <h6><?php echo $_GET['error']; }?></h6>
                     <div class="mb-3">
-                        <label for="exampleInputUser1" class="form-label">Nombre de usuario:</label>
+                        <label for="exampleInputUser1" class="form-label">Email:</label>
                         <input type="text" name="user" class="form-control" id="user" aria-describedby="userHelp">
-                        <p style="display: none; color: red;" id="alertauser">¡El formato de usuario que intenta introducir no es valido!</p> <!-- El mensaje de error permanece oculto hasta que el script detecta un error en el formato del texto introducido -->
+                        <p style="display: none; color: red;" id="alertauser">¡El formato de correo que intenta introducir no es valido!</p> <!-- El mensaje de error permanece oculto hasta que el script detecta un error en el formato del texto introducido -->
                     </div>
 
                     <div class="mb-3">
