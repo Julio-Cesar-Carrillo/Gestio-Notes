@@ -1,9 +1,5 @@
 // Define una función para validar el campo de usuario utilizando una expresión regular
-function validarUser(user) 
-{
-    const regex = /^[a-zA-Z]*$/; // La expresión regular permite solo letras (mayúsculas y minúsculas)
-    return regex.test(user); // Devuelve true si el usuario cumple con la expresión regular
-}
+
 
 document.addEventListener("DOMContentLoaded", function () 
 {
@@ -12,29 +8,27 @@ document.addEventListener("DOMContentLoaded", function ()
     const passF = document.getElementById('pass');
 
     // Agrega un evento de escucha para el campo de usuario
-    userF.addEventListener('input', function () 
-    {
+    // userF.addEventListener('keyup', function () {
+    userF.addEventListener('input', function () {
         // Obtiene el valor del campo de usuario y la alerta de usuario
         const user = document.getElementById('user');
         const alertauser = document.getElementById('alertauser');
-
-        // Comprueba si el valor del campo de usuario cumple con la validación de la función "validarUser"
-        if (validarUser(user.value)) 
-        {
-            alertauser.style.display = 'none'; // Oculta la alerta de usuario si es válido
-        } 
-        
-        else if (user.value.length < 1) 
-        {
-            alertauser.style.display = 'none'; // Oculta la alerta de usuario si el campo está vacío
-        } 
-        
-        else 
-        {
-            alertauser.style.display = 'block'; // Muestra la alerta de usuario si no cumple con la validación
+    
+        // Comprueba si el valor del campo de usuario no cumple con la validación de la función "validarUser"
+        if (!validarUser(user.value)) {
+            alertauser.style.display = 'block'; // Muestra la alerta de usuario si el formato es incorrecto
+        } else {
+            alertauser.style.display = 'none'; // Oculta la alerta de usuario si es válido o el campo está vacío
         }
     });
-
+    
+    // Función para validar un correo electrónico
+    function validarUser(valor) {
+        // Patrón de correo electrónico
+        const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return pattern.test(valor);
+    }
+    
     // Agrega un evento de escucha para el campo de contraseña
     passF.addEventListener('input', function () 
     {
