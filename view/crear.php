@@ -11,31 +11,31 @@
             <form action="./procesos/crear.php" method="post" id="formularioCrear">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" oninput="validarNombre(this)">
-            <span id="nombre_error" class="error"></span>
+            <span id="nombre_error" class="error" style="color: red;"></span>
             
             <br><br>
             
             <label for="apellido">Apellido:</label>
             <input type="text" id="apellido" name="apellido" oninput="validarApellido(this)">
-            <span id="apellido_error" class="error"></span>
+            <span id="apellido_error" class="error" style="color: red;"></span>
             
             <br><br>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" oninput="validarEmail(this)">
-            <span id="email_error" class="error"></span>
+            <span id="email_error" class="error" style="color: red;"></span>
             
             <br><br>
 
             <label for="nombre">Contraseña:</label>
             <input type="tel" id="pwd" name="pwd" oninput="validarPwd(this)">
-            <span id="pwd_error" class="error"></span>
+            <span id="pwd_error" class="error" style="color: red;"></span>
             
             <br><br>
 
             <label for="nombre">Número de Teléfono:</label>
             <input type="tel" id="telefono" name="telefono" oninput="validarTelefono(this)">
-            <span id="telefono_error" class="error"></span
+            <span id="telefono_error" class="error" style="color: red;"></span
                 
             ><br><br>
 
@@ -57,7 +57,7 @@
                     }
                 ?>
             </select>
-            <span id="curso_error" class="error"></span>
+            <span id="curso_error" class="error" style="color: red;"></span>
             
             <br><br>
 
