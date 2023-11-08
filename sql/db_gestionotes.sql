@@ -1,3 +1,7 @@
+DROP DATABASE db_gestionotes;
+CREATE DATABASE db_gestionotes;
+USE db_gestionotes;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
