@@ -82,8 +82,23 @@ function validarPwd(input)
     {
       errorSpan.textContent = "";
     }
-  }
-  
+}
+
+function validarCurso() {
+    const cursoSelect = document.getElementById("curso");
+    const errorSpan = document.getElementById("curso_error");
+
+    if (cursoSelect.value === "") {
+        errorSpan.textContent = "Debes seleccionar un curso.";
+    } else {
+        errorSpan.textContent = "";
+    }
+}
+
+// Agregar un evento de escucha al elemento 'curso' para activar la función de validación
+const cursoSelect = document.getElementById("curso");
+cursoSelect.addEventListener("change", validarCurso);
+
 
 function validarTelefono(input) 
 {
@@ -106,5 +121,7 @@ function validarTelefono(input)
         errorSpan.textContent = "";
     }
 }
+
+
 
 
