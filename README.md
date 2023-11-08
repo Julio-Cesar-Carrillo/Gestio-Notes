@@ -1,9 +1,7 @@
 # Gestio-Notes
 
-<h2>Objectiu</h2>
-<p>Generar un CRUD, paginació, transaccions, filtrat i anàlisis de resultats i correu.</p>
-
-<h2>Descripció de l'activitat</h2>
+<h2>Objectiu<h2>
+Generar un CRUD, paginació, transaccions, filtrat i anàlisis de resultats i correu.
 
 Partint de l'activitat A6 (login escola) caldrà fer les següents ampliacions: 
 
@@ -16,25 +14,3 @@ Partint de l'activitat A6 (login escola) caldrà fer les següents ampliacions:
 <li>També hi haurà d'haver una pàgina que mostri la informació de les notes mitjanes per matèria, quina ha sigut la matèria amb nota mitjana més alta i quins alumnes han tret les millors notes, especificant l'assignatura (si 2 alumnes han tret la millor nota en una assignatura només ens quedem amb el primer). </li>
 <li>Per últim l'administrador podrà enviar correus a un alumne o a diversos alumnes o a tots els alumnes. </li>
 <li>Crear un repositori en GitHub anomenat Gestió-Notes, en aquest repositori ha d'allotjar-se el codi font associat al desenvolupament.materials</li>
-</ol>
-
-<h2>Evalucion</h2>
-Detallar el tipus d’avaluació que es farà servir:
-<ul>
-<li>autoavaluació, coavaluació, heteroavaluació quantitativa</li>
-<li>qualitativa o quantitativa i incloure  l’eina o eines que s'utilitzen. </li>
-
-<li>Disseny responsive:	 0,5pts</li>
-<li>Treballar el CSS: 	0,5pts</li>
-<li>Pujar el codi al GitHub: 	0,5pts</li>
-<li>Crear BD en MySQL: 	0,5pts</li>
-<li>Generar el CRUD: 	1pt</li>
-<li>Crear les classes: 	1pt</li>
-<li>Afegir transaccions: 	0,5pts</li>
-<li>Paginació: 	1pt</li>
-<li>Anàlisis de resultats: 	1pt</li>
-<li>Filtrat: 	1pts</li>
-<li>Validació JS fent servir  sweetalert2: 	1pt</li>
-<li>Correu: 	1pts</li>
-<li>Validacions de servidor: 	0,5pts</li>
-</ul>

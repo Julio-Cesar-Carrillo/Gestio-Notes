@@ -1,70 +1,97 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2023 a las 19:28:44
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+DROP DATABASE db_ies_contreras;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE DATABASE db_ies_contreras;
 
+USE db_ies_contreras;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- Crear la tabla de Estudiantes
+CREATE TABLE tbl_alumnos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    email VARCHAR(100),
+    pass VARCHAR(100),
+    telefono VARCHAR(20)
+);
 
---
--- Base de datos: `db_ies_contreras`
---
+-- Crear la tabla de Profesores
+CREATE TABLE tbl_profesores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    email VARCHAR(100),
+    pass VARCHAR(100)
+);
 
--- --------------------------------------------------------
+-- Crear la tabla de Asignaturas
+CREATE TABLE tbl_asignaturas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    id_profesor INT,
+    FOREIGN KEY (id_profesor) REFERENCES tbl_profesores(id)
+);
 
---
--- Estructura de tabla para la tabla `tbl_profesores`
---
+-- Crear la tabla de Notas
+CREATE TABLE tbl_notas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_alumno INT,
+    id_asignatura INT,
+    nota DECIMAL(4, 2),
+    fecha_registro DATE,
+    FOREIGN KEY (id_alumno) REFERENCES tbl_alumnos(id),
+    FOREIGN KEY (id_asignatura) REFERENCES tbl_asignaturas(id)
+);
 
-CREATE DATABASE 'db_ies_contreras';
-USE 'db_ies_contreras';
+-- Crear la tabla de Administradores
+CREATE TABLE tbl_administradores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100),
+    pass VARCHAR(100)  -- Asegúrate de utilizar una técnica segura para almacenar contraseñas, como el hash de la contraseña.
+);
 
-CREATE TABLE `tbl_profesores` (
-  `id` int(11) NOT NULL,
-  `nombre_profe` varchar(45) NOT NULL,
-  `contra_profe` varchar(450) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Crear la tabla de Cursos
+CREATE TABLE tbl_cursos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100)
+);
 
---
--- Volcado de datos para la tabla `tbl_profesores`
---
+-- Agregar una clave foránea en la tabla de Estudiantes para vincularlos a un curso
+ALTER TABLE tbl_alumnos
+ADD id_curso INT,
+ADD FOREIGN KEY (id_curso) REFERENCES tbl_cursos(id);
 
-INSERT INTO `tbl_profesores` (`id`, `nombre_profe`, `contra_profe`) VALUES
-(1, 'Alberto', '7a9a93a93e4f3824b7be8f9acd43894f76b2776e4c33bbb5eb1cf1ba4beaaf01'),
-(2, 'admin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225');
+-- Agregar una clave foránea en la tabla de Profesores para vincularlos a un curso
+ALTER TABLE tbl_profesores
+ADD id_curso INT,
+ADD FOREIGN KEY (id_curso) REFERENCES tbl_cursos(id);
 
---
--- Índices para tablas volcadas
---
+-- Agregar una clave foránea en la tabla de Asignaturas para vincularlas a un curso
+ALTER TABLE tbl_asignaturas
+ADD id_curso INT,
+ADD FOREIGN KEY (id_curso) REFERENCES tbl_cursos(id);
 
---
--- Indices de la tabla `tbl_profesores`
---
-ALTER TABLE `tbl_profesores`
-  ADD PRIMARY KEY (`id`);
+-- Insert en tabla profesores
+INSERT INTO
+  `tbl_administradores` (`ID`, `email`, `pass`)
+VALUES
+  (
+    NULL,
+    'admin@gamil.com',
+    '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'
+  );
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
+-- Insert en la tabla profesores
+INSERT INTO `tbl_profesores` (`id`, `nombre`, `apellido`,`email`,`pass`) VALUES (NULL, 'alberto','santos','alberto@fje.edu','15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225');
+-- Insert en la tabla asignaturas
+INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES (NULL, 'DAW');
 
---
--- AUTO_INCREMENT de la tabla `tbl_profesores`
---
-ALTER TABLE `tbl_profesores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Insert en la tabla asignaturas
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M12',1);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M7',1);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M6',1);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M9',1);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M8',1);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M3',1);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M2',1);
+-- Insert en la tabla alumnos
+INSERT INTO `tbl_alumnos` (`id`, `nombre`, `apellido`, `email`, `pass`, `telefono`, `id_curso`) VALUES (NULL, 'julio', 'carrillo', 'julio@gamil.com', 'asd', '123', '1');
