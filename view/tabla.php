@@ -1,3 +1,15 @@
+<?php
+include_once("./conexion.php");
+// Consulta para mostar la tabla de los alumnos
+
+$sql = "SELECT E.*, D.nombre as 'curso' FROM tbl_alumnos E JOIN tbl_cursos D ON E.id_curso = D.id;";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_execute($stmt);
+$alumnos = mysqli_stmt_get_result($stmt);
+// Cerramos la consulta
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,37 +20,33 @@
 </head>
 
 <body>
-    <?php
-    include_once("./conexion.php");
-    $sql = "SELECT * FROM tbl_alumnos";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_execute($stmt);
-    $alumnos = mysqli_stmt_get_result($stmt);
-    echo "<table border=1>";
-    echo "<tr>
-          <th>nombre</th>
-          <th>apellido</th>
-          <th>email</th>
-          <th>pass</th>
-          <th>telefono</th>
-          <th>curso</th>
-          <th>editar</th>
-          <th>eliminar</th>
-          </tr>";
-    foreach ($alumnos as $alumno) {
-        echo "<tr>";
-        echo "<td>" . $alumno["nombre"] . "</td>";
-        echo "<td>" . $alumno["apellido"] . "</td>";
-        echo "<td>" . $alumno["email"] . "</td>";
-        echo "<td>" . $alumno["pass"] . "</td>";
-        echo "<td>" . $alumno["telefono"] . "</td>";
-        echo "<td>" . $alumno["id_curso"] . "</td>";
-        echo "<td><a href='procesos/editar.php?id=" . $alumno['id'] . "'>editar</a>";
-        echo "<td><a href='procesos/eliminar.php?id=" . $alumno['id'] . "'>aliminar</a>";
-        echo "</tr>";
-    }
-    echo "</table>";
-    ?>
+    <a href="./crear.html">Crear alumno</a>
+    <table border=1>
+        <tr>
+            <th>nombre y apellidos</th>
+            <th>email</th>
+            <th>pass</th>
+            <th>telefono</th>
+            <th>curso</th>
+            <th>Notas</th>
+            <th>editar</th>
+            <th>eliminar</th>
+        </tr>
+        <?php
+        foreach ($alumnos as $alumno) {
+            echo "<tr>
+              <td> {$alumno["nombre"]} {$alumno["apellido"]} </td>   
+              <td> {$alumno["email"]} </td>
+              <td> {$alumno["pass"]} </td>
+              <td> {$alumno["telefono"]} </td>
+              <td> {$alumno["curso"]} </td>
+              <td><a href='./notas.php?id={$alumno['id']}'>notas</a>
+              <td><a href='./procesos/editar.php?id={$alumno['id']}'>editar</a>
+              <td><a href='./procesos/eliminar.php?id={$alumno['id']}'>aliminar</a>
+              </tr>";
+        }
+        ?>
+    </table>
 </body>
 
 </html>

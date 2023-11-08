@@ -34,8 +34,8 @@ CREATE TABLE tbl_asignaturas (
 -- Crear la tabla de Notas
 CREATE TABLE tbl_notas (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    id_alumno INT,
-    id_asignatura INT,
+    id_alumno INT NOT NULL,
+    id_asignatura INT NOT NULL,
     nota DECIMAL(4, 2),
     fecha_registro DATE,
     FOREIGN KEY (id_alumno) REFERENCES tbl_alumnos(id),
@@ -82,16 +82,22 @@ VALUES
 
 -- Insert en la tabla profesores
 INSERT INTO `tbl_profesores` (`id`, `nombre`, `apellido`,`email`,`pass`) VALUES (NULL, 'alberto','santos','alberto@fje.edu','15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225');
--- Insert en la tabla asignaturas
-INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES (NULL, 'DAW');
 
--- Insert en la tabla asignaturas
-INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M12',1);
-INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M7',1);
-INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M6',1);
-INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M9',1);
-INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M8',1);
-INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M3',1);
-INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M2',1);
+-- Insert en la tabla cursos
+INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES (NULL, 'SMX1');
+INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES (NULL, 'SMX2');
+INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES (NULL, 'ASIX1');
+INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES (NULL, 'ASIX2');
+INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES (NULL, 'DAW2');
+
+-- Insert en la tabla asignaturas en el curso DAW2
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M12',5);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M7',5);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M6',5);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M9',5);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M8',5);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M3',5);
+INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`) VALUES (NULL, 'M2',5);
+
 -- Insert en la tabla alumnos
 INSERT INTO `tbl_alumnos` (`id`, `nombre`, `apellido`, `email`, `pass`, `telefono`, `id_curso`) VALUES (NULL, 'julio', 'carrillo', 'julio@gamil.com', 'asd', '123', '1');
