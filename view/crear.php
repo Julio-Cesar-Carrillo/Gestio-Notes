@@ -13,7 +13,8 @@
             <!-- Campo de entrada para el nombre -->
             <input type="text" id="nombre" name="nombre" oninput="validarNombre(this)"> <!-- Llama a la función validarNombre cuando detecta cambios en el input -->
             <!-- Mensaje de error para la validación del nombre -->
-            <span id="nombre_error" class="error" style="font-weight: bolder;"></span>
+            <br>
+            <span id="nombre_error" class="error"></span>
 
             <br><br>
 
@@ -21,7 +22,8 @@
             <!-- Campo de entrada para el apellido -->
             <input type="text" id="apellido" name="apellido" oninput="validarApellido(this)"> <!-- Llama a la función validarApellido cuando detecta cambios en el input -->
             <!-- Mensaje de error para la validación del apellido -->
-            <span id="apellido_error" class="error" style="font-weight: bolder;"></span>
+            <br>
+            <span id="apellido_error" class="error"></span>
 
             <br><br>
 
@@ -29,7 +31,8 @@
             <!-- Campo de entrada para el correo electrónico -->
             <input type="email" id="email" name="email" oninput="validarEmail(this)"> <!-- Llama a la función validarEmail cuando detecta cambios en el input -->
             <!-- Mensaje de error para la validación del correo electrónico -->
-            <span id="email_error" class="error" style="font-weight: bolder;"></span>
+            <br>
+            <span id="email_error" class="error"></span>
 
             <br><br>
 
@@ -37,7 +40,8 @@
             <!-- Campo de entrada para la contraseña -->
             <input type="password" id="pwd" name="pwd" oninput="validarPwd(this)"> <!-- Llama a la función validarPwd cuando detecta cambios en el input -->
             <!-- Mensaje de error para la validación de la contraseña -->
-            <span id="pwd_error" class="error" style="font-weight: bolder;"></span>
+            <br>
+            <span id="pwd_error" class="error"></span>
 
             <br><br>
 
@@ -45,9 +49,10 @@
             <!-- Campo de entrada para el número de teléfono -->
             <input type="tel" id="telefono" name="telefono" oninput="validarTelefono(this)"> <!-- Llama a la función validarTel cuando detecta cambios en el input -->
             <!-- Mensaje de error para la validación del número de teléfono -->
-            <span id="telefono_error" class="error" style="font-weight: bolder;"></span>
+            <br>
+            <span id="telefono_error" class="error"></span>
                 
-            ><br><br>
+            <br><br>
 
             <label>Curso:</label><br>
                 <?php
@@ -58,17 +63,18 @@
 
                     if (mysqli_num_rows($resultadoSelectCurso) > 0) /* Comprueba si hay resultados */
                     {
-                        echo "<select name='curso' id='curso'>"; /* Selector de opciones */
-                            echo "<option disabled selected> -- Escoge una opción -- </option>"; // Opcíon por defecto, Deshabilitada para que no se pueda seleccionar 
+                        echo "<select name='curso' id='curso' onchange='validarCurso(this)'>"; /* Selector de opciones */
+                            echo "<option value='' selected> -- Escoge una opción -- </option>"; // Opcíon por defecto, Deshabilitada para que no se pueda seleccionar 
 
                             while ($row = mysqli_fetch_assoc($resultadoSelectCurso)) // Si hay resultados...
                             {
                                 $curso = $row['nombre']; /* Almacena en una variable el nombre del curso */
-                                echo "<option value='$curso'>$curso</option>"; /* Imprime el nombre del curso */
+                                $id_curso = $row['id'];
+                                echo "<option value='$id_curso'>$curso</option>"; /* Imprime el nombre del curso */
                             }
                         echo "</select>";
-
-                        echo "<span id='curso_error' class='error' style=font-weight: bolder;'></span>"; /* Mensaje de error */
+                        echo "<br>";
+                        echo "<span id='curso_error' class='error'</span>"; /* Mensaje de error */
                     }
 
                     else 
