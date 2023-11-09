@@ -17,8 +17,6 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Lora&display=swap" rel="stylesheet">
-
-        <script src="./js/boton.js"></script> <!-- Script que bloquea el botón hasta que no han llenado todos los campos -->
     </head>
 
     <body>

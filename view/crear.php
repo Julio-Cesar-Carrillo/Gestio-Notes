@@ -51,7 +51,7 @@
 
             <label>Curso:</label><br>
                 <?php
-                    include('./conexion.php'); /* Incluimos el fichero de conexión a la base de datos */
+                    include('../procesos/conexion.php'); /* Incluimos el fichero de conexión a la base de datos */
 
                     $sqlSelectCurso = "SELECT nombre FROM tbl_cursos;"; /* SQL para seleccionar el nombre de los cursos de la tabla tbl_cursos */
                     $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso); /* Resultado del SQL */
