@@ -31,11 +31,11 @@
                     <?php if (isset($_GET['error'])) { ?>
                     <h6><?php echo $_GET['error']; }?></h6>
                     <div class="mb-3">
-                        <label for="nombre">Nombre:</label>
+                        <label for="nombre">Email:</label>
                         <br>
-                        <input type="text" id="nombre" name="nombre" oninput="validarNombre(this)" style="width:20vw; border: radius 5px;">
+                        <input type="text" id="email" name="nombre" oninput="validarEmail(this)" style="width:20vw; border: radius 5px;">
                         <br>
-                        <span id="nombre_error" class="error" style="color: white; font-weight: bolder;"></span>
+                        <span id="email_error" class="error" style="color: white; font-weight: bolder;"></span>
                     </div>
 
                     <div class="mb-3">
@@ -56,7 +56,7 @@
         <script>
             // Función para validar el formulario
             function validarFormulario() {
-                var nombre = document.getElementById("nombre").value;
+                var nombre = document.getElementById("email").value;
                 var pwd = document.getElementById("pwd").value;
             
                 // Verificar si todos los campos están llenos
@@ -72,7 +72,7 @@
             }
             
             // Agregar eventos 'input' a los campos para llamar a la función de validación
-            document.getElementById("nombre").addEventListener("input", validarFormulario);
+            document.getElementById("email").addEventListener("input", validarFormulario);
             document.getElementById("pwd").addEventListener("input", validarFormulario);
 
             // Llamar a la función de validación inicialmente
