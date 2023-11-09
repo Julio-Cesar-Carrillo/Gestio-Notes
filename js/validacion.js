@@ -1,61 +1,131 @@
-// Define una función para validar el campo de usuario utilizando una expresión regular
-function validarUser(user) 
+function validarNombre(input) 
 {
-    const regex = /^[a-zA-Z]*$/; // La expresión regular permite solo letras (mayúsculas y minúsculas)
-    return regex.test(user); // Devuelve true si el usuario cumple con la expresión regular
+    const nombre = input.value;
+    const errorSpan = document.getElementById("nombre_error");
+
+    if (nombre.trim() === "") 
+    {
+        errorSpan.textContent = "Este campo es obligatorio.";
+    } 
+    
+    else if (/^\s|\s$|\d/.test(nombre)) 
+    {
+        errorSpan.textContent = "El nombre no puede contener números o espacios al inicio o al final.";
+    } 
+    
+    else 
+    {
+        errorSpan.textContent = "";
+    }
 }
 
-document.addEventListener("DOMContentLoaded", function () 
+function validarApellido(input) 
 {
-    // Obtiene referencias a los campos de usuario y contraseña
-    const userF = document.getElementById('user');
-    const passF = document.getElementById('pass');
+    const nombre = input.value;
+    const errorSpan = document.getElementById("apellido_error");
 
-    // Agrega un evento de escucha para el campo de usuario
-    userF.addEventListener('input', function () 
+    if (nombre.trim() === "") 
     {
-        // Obtiene el valor del campo de usuario y la alerta de usuario
-        const user = document.getElementById('user');
-        const alertauser = document.getElementById('alertauser');
-
-        // Comprueba si el valor del campo de usuario cumple con la validación de la función "validarUser"
-        if (validarUser(user.value)) 
-        {
-            alertauser.style.display = 'none'; // Oculta la alerta de usuario si es válido
-        } 
-        
-        else if (user.value.length < 1) 
-        {
-            alertauser.style.display = 'none'; // Oculta la alerta de usuario si el campo está vacío
-        } 
-        
-        else 
-        {
-            alertauser.style.display = 'block'; // Muestra la alerta de usuario si no cumple con la validación
-        }
-    });
-
-    // Agrega un evento de escucha para el campo de contraseña
-    passF.addEventListener('input', function () 
+        errorSpan.textContent = "Este campo es obligatorio.";
+    } 
+    
+    else if (/^\s|\s$|\d/.test(nombre)) 
     {
-        // Obtiene el valor del campo de contraseña y la alerta de contraseña
-        const pass = document.getElementById('pass');
-        const alertapass = document.getElementById('alertapass');
+        errorSpan.textContent = "El apellido no puede contener números o espacios al inicio o al final.";
+    } 
+    
+    else 
+    {
+        errorSpan.textContent = "";
+    }
+}
 
-        // Comprueba la longitud de la contraseña y muestra la alerta correspondiente
-        if (pass.value.length < 1) 
-        {
-            alertapass.style.display = 'none'; // Oculta la alerta de contraseña si el campo está vacío
-        } 
-        
-        else if (pass.value.length < 9) 
-        {
-            alertapass.style.display = 'block'; // Muestra la alerta de contraseña si es demasiado corta
-        } 
-        
-        else 
-        {
-            alertapass.style.display = 'none'; // Oculta la alerta de contraseña en otros casos
-        }
-    });
-});
+function validarEmail(input) 
+{
+    const email = input.value;
+    const errorSpan = document.getElementById("email_error");
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if (email.trim() === "") 
+    {
+        errorSpan.textContent = "Este campo es obligatorio.";
+    } 
+
+
+    else if (!emailRegex.test(email)) 
+    {
+        errorSpan.textContent = "Ingresa un correo electronico valido.";
+    } 
+    
+    else 
+    {
+        errorSpan.textContent = "";
+    }
+}
+
+function validarPwd(input) 
+{
+    const pwd = input.value;
+    const errorSpan = document.getElementById("pwd_error");
+  
+    if (pwd.trim() === "") 
+    {
+      errorSpan.textContent = "Este campo es obligatorio.";
+    } 
+    
+    else if (pwd.length < 9) 
+    {
+      errorSpan.textContent = "La contraseña debe contener al menos 9 caracteres.";
+    } 
+    
+    else 
+    {
+      errorSpan.textContent = "";
+    }
+}
+
+function validarCurso() {
+    const cursoSelect = document.getElementById("curso");
+    const errorSpan = document.getElementById("curso_error");
+
+    if (cursoSelect.value === "") 
+    {
+        errorSpan.textContent = "Debes seleccionar un curso.";
+    } 
+    
+    else 
+    {
+        errorSpan.textContent = "";
+    }
+}
+
+// Agregar un evento de escucha al elemento 'curso' para activar la función de validación
+const cursoSelect = document.getElementById("curso");
+cursoSelect.addEventListener("change", validarCurso);
+
+
+function validarTelefono(input) 
+{
+    const telefono = input.value;
+    const errorSpan = document.getElementById("telefono_error");
+    const telefonoRegex = /^\d{9}$/;
+
+    if (telefono.trim() === "") 
+    {
+        errorSpan.textContent = "Este campo es obligatorio.";
+    } 
+
+    else if (!telefonoRegex.test(telefono)) 
+    {
+        errorSpan.textContent = "Ingresa un numero de telefono válido (9 dígitos).";
+    } 
+    
+    else 
+    {
+        errorSpan.textContent = "";
+    }
+}
+
+
+
+

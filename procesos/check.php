@@ -1,13 +1,6 @@
 <?php
     session_start(); // Iniciamos la sesión.
 
-    // Verifica si las variables de sesión 'user' y 'pass' están definidas
-    if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) 
-    {
-        header('Location: ../index.php?error=Debes rellenar el formulario para acceder a check.php');
-        exit();
-    }
-
     include('conexion.php'); // Incluimos el archivo de conexión a la base de datos.
 
     // Preparamos una consulta SQL para buscar un profesor por nombre

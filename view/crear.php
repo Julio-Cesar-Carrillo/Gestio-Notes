@@ -3,61 +3,79 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../js/validarCrear.js"></script>
+        <script src="../js/validacion.js"></script> <!-- Script que valida el formulario -->
         <title>Document</title>
     </head>
 
     <body>
-            <form action="./procesos/crear.php" method="post" id="formularioCrear">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" oninput="validarNombre(this)">
-            <span id="nombre_error" class="error" style="color: red;"></span>
-            
+        <form action="./procesos/crear.php" method="post" id="formularioCrear">
+        <label for="nombre">Nombre:</label>
+            <!-- Campo de entrada para el nombre -->
+            <input type="text" id="nombre" name="nombre" oninput="validarNombre(this)"> <!-- Llama a la función validarNombre cuando detecta cambios en el input -->
+            <!-- Mensaje de error para la validación del nombre -->
+            <span id="nombre_error" class="error" style="font-weight: bolder;"></span>
+
             <br><br>
-            
+
             <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" oninput="validarApellido(this)">
-            <span id="apellido_error" class="error" style="color: red;"></span>
-            
+            <!-- Campo de entrada para el apellido -->
+            <input type="text" id="apellido" name="apellido" oninput="validarApellido(this)"> <!-- Llama a la función validarApellido cuando detecta cambios en el input -->
+            <!-- Mensaje de error para la validación del apellido -->
+            <span id="apellido_error" class="error" style="font-weight: bolder;"></span>
+
             <br><br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" oninput="validarEmail(this)">
-            <span id="email_error" class="error" style="color: red;"></span>
-            
+            <!-- Campo de entrada para el correo electrónico -->
+            <input type="email" id="email" name="email" oninput="validarEmail(this)"> <!-- Llama a la función validarEmail cuando detecta cambios en el input -->
+            <!-- Mensaje de error para la validación del correo electrónico -->
+            <span id="email_error" class="error" style="font-weight: bolder;"></span>
+
             <br><br>
 
             <label for="nombre">Contraseña:</label>
-            <input type="tel" id="pwd" name="pwd" oninput="validarPwd(this)">
-            <span id="pwd_error" class="error" style="color: red;"></span>
-            
+            <!-- Campo de entrada para la contraseña -->
+            <input type="password" id="pwd" name="pwd" oninput="validarPwd(this)"> <!-- Llama a la función validarPwd cuando detecta cambios en el input -->
+            <!-- Mensaje de error para la validación de la contraseña -->
+            <span id="pwd_error" class="error" style="font-weight: bolder;"></span>
+
             <br><br>
 
             <label for="nombre">Número de Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" oninput="validarTelefono(this)">
-            <span id="telefono_error" class="error" style="color: red;"></span
+            <!-- Campo de entrada para el número de teléfono -->
+            <input type="tel" id="telefono" name="telefono" oninput="validarTelefono(this)"> <!-- Llama a la función validarTel cuando detecta cambios en el input -->
+            <!-- Mensaje de error para la validación del número de teléfono -->
+            <span id="telefono_error" class="error" style="font-weight: bolder;"></span>
                 
             ><br><br>
 
             <label>Curso:</label><br>
-            <select name="curso" id="curso">
-                <option value="" disabled selected>-- Escoge una opción --</option>
                 <?php
-                    include('./conexion.php');
-                    $sqlSelectCurso = "SELECT nombre FROM tbl_cursos;";
-                    $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso);
+                    include('./conexion.php'); /* Incluimos el fichero de conexión a la base de datos */
 
-                    if (mysqli_num_rows($resultadoSelectCurso) > 0) 
+                    $sqlSelectCurso = "SELECT nombre FROM tbl_cursos;"; /* SQL para seleccionar el nombre de los cursos de la tabla tbl_cursos */
+                    $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso); /* Resultado del SQL */
+
+                    if (mysqli_num_rows($resultadoSelectCurso) > 0) /* Comprueba si hay resultados */
                     {
-                        while ($row = mysqli_fetch_assoc($resultadoSelectCurso)) 
-                        {
-                            $curso = $row['nombre'];
-                            echo "<option value='$curso'>$curso</option>";
-                        }
+                        echo "<select name='curso' id='curso'>"; /* Selector de opciones */
+                            echo "<option disabled selected> -- Escoge una opción -- </option>"; // Opcíon por defecto, Deshabilitada para que no se pueda seleccionar 
+
+                            while ($row = mysqli_fetch_assoc($resultadoSelectCurso)) // Si hay resultados...
+                            {
+                                $curso = $row['nombre']; /* Almacena en una variable el nombre del curso */
+                                echo "<option value='$curso'>$curso</option>"; /* Imprime el nombre del curso */
+                            }
+                        echo "</select>";
+
+                        echo "<span id='curso_error' class='error' style=font-weight: bolder;'></span>"; /* Mensaje de error */
+                    }
+
+                    else 
+                    {
+                        echo "No se han encontrado cursos"; // Mensaje de error.
                     }
                 ?>
-            </select>
-            <span id="curso_error" class="error" style="color: red;"></span>
             
             <br><br>
 
@@ -66,7 +84,8 @@
 
         <script>
             // Función para validar el formulario
-            function validarFormulario() {
+            function validarFormulario() 
+            {
                 var nombre = document.getElementById("nombre").value;
                 var apellido = document.getElementById("apellido").value;
                 var email = document.getElementById("email").value;
@@ -75,13 +94,14 @@
                 var curso = document.getElementById("curso").value;
             
                 // Verificar si todos los campos están llenos
-                if (nombre !== "" && apellido !== "" && email !== "" && pwd !== "" && telefono !== "" && curso !== "") {
-                document.getElementById("enviarButton").disabled = false; // Habilitar el botón de envío
+                if (nombre !== "" && apellido !== "" && email !== "" && pwd !== "" && telefono !== "" && curso !== "") 
+                {
+                    document.getElementById("enviarButton").disabled = false; // Habilitar el botón de envío
                 } 
                 
                 else 
                 {
-                document.getElementById("enviarButton").disabled = true; // Deshabilitar el botón de envío
+                    document.getElementById("enviarButton").disabled = true; // Deshabilitar el botón de envío
                 }
             }
             

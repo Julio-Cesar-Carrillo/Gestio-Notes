@@ -1,12 +1,6 @@
 <?php
     session_start(); // Iniciamos la sesión.
 
-    // Verifica si el formulario se ha enviado
-    if (!isset($_POST['enviar'])) {
-        header('Location: ../index.php?error=Debes rellenar el formulario para acceder a validacion.php');
-        exit();
-    }
-
     // Si se ha enviado un valor para 'user', lo almacenamos en una variable de sesión llamada 'user'
     if (isset($_POST['user'])) {
         $_SESSION['user'] = $_POST['user'];
