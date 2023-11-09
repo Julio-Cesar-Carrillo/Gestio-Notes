@@ -33,17 +33,11 @@
                     <?php if (isset($_GET['error'])) { ?>
                     <h6><?php echo $_GET['error']; }?></h6>
                     <div class="mb-3">
-<<<<<<< HEAD
                         <label for="nombre">Nombre:</label>
                         <br>
                         <input type="text" id="nombre" name="nombre" oninput="validarNombre(this)" style="width:20vw; border: radius 5px;">
                         <br>
                         <span id="nombre_error" class="error" style="color: white; font-weight: bolder;"></span>
-=======
-                        <label for="exampleInputUser1" class="form-label">Email:</label>
-                        <input type="text" name="user" class="form-control" id="user" aria-describedby="userHelp">
-                        <p style="display: none; color: red;" id="alertauser">¡El formato de correo que intenta introducir no es valido!</p> <!-- El mensaje de error permanece oculto hasta que el script detecta un error en el formato del texto introducido -->
->>>>>>> 705e812321be3495e6f9221a14a9ab0615d59756
                     </div>
 
                     <div class="mb-3">
