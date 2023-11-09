@@ -1,9 +1,6 @@
 <?php
 session_start(); // Iniciamos la sesión.
 
-<<<<<<< HEAD
-    include('conexion.php'); // Incluimos el archivo de conexión a la base de datos.
-=======
 // Verifica si las variables de sesión 'user' y 'pass' están definidas
 if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) 
 {
@@ -13,7 +10,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['pass']))
 }
 
 include('conexion.php'); // Incluimos el archivo de conexión a la base de datos.
->>>>>>> 705e812321be3495e6f9221a14a9ab0615d59756
 
 // Preparamos una consulta SQL para buscar un profesor por nombre
 $sql = "SELECT * FROM tbl_alumnos WHERE email = ? and pass = ?";
