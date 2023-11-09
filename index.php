@@ -56,11 +56,11 @@
         <script>
             // Función para validar el formulario
             function validarFormulario() {
-                var nombre = document.getElementById("email").value;
+                var email = document.getElementById("email").value;
                 var pwd = document.getElementById("pwd").value;
             
                 // Verificar si todos los campos están llenos
-                if (nombre !== "" && pwd !== "" ) 
+                if (email !== "" && pwd !== "" ) 
                 {
                     document.getElementById("enviarButton").disabled = false; // Habilitar el botón de envío
                 } 
