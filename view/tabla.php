@@ -1,7 +1,8 @@
 <?php
 include_once("./procesos/conexion.php");
 // Consulta para mostar la tabla de los alumnos
-$sql = "SELECT E.*, D.nombre as 'curso' FROM tbl_alumnos E JOIN tbl_cursos D ON E.id_curso = D.id;";
+$sql = "SELECT E.*, D.nombre as 'curso' FROM tbl_alumnos E 
+        INNER JOIN tbl_cursos D ON E.id_curso = D.id ORDER BY id ASC;";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_execute($stmt);
 // Guardamos los datos de la consulta
@@ -41,7 +42,7 @@ mysqli_close($conn);
               <td> {$alumno["telefono"]} </td>
               <td> {$alumno["curso"]} </td>
               <td><a href='./notas.php?id={$alumno['id']}'>notas</a>
-              <td><a href='./editar.php?id={$alumno['id']}'>editar</a>
+              <td><a href='./editar_alumno.php?id={$alumno['id']}'>editar</a>
               <td><a href='./procesos/eliminar.php?id={$alumno['id']}'>aliminar</a>
               </tr>";
         }

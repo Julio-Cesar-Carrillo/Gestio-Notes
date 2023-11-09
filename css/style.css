@@ -128,7 +128,7 @@ form button:hover {
     background-color: #023b56;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 468px) {
     * {
         overflow: hidden
     }

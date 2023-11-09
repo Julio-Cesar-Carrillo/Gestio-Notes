@@ -7,7 +7,7 @@ try {
     $pwd = $_POST["pwd"];
     $telefono = $_POST["telefono"];
     $curso = $_POST["curso"];
-
+echo $curso."<br>";
     include_once("./conexion.php");
 
     mysqli_autocommit($conn, false);

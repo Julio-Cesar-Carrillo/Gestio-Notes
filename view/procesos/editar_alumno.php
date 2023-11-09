@@ -14,18 +14,19 @@ if (!isset($_POST['editar'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
     $telefono =  mysqli_real_escape_string($conn, $_POST['telefono']);
-
+    $curso =  mysqli_real_escape_string($conn, $_POST['curso']);
+    echo $curso."<br>";
     try {
         // En primer lugar, se desactiva la autoejecución de las consultas
         mysqli_autocommit($conn, false);
 
         mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
         $sql_pedido = "UPDATE tbl_alumnos
-                        SET nombre = ?, apellido = ?, email = ?, pass = ?, telefono = ?
+                        SET nombre = ?, apellido = ?, email = ?, pass = ?, telefono = ? id_curso=?
                         WHERE id = ?";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql_pedido);
-        mysqli_stmt_bind_param($stmt, "sssssi", $nombre, $apellido, $email, $pwd, $telefono, $alumno_id);
+        mysqli_stmt_bind_param($stmt, "ssssssi", $nombre, $apellido, $email, $pwd, $telefono, $curso ,$alumno_id);
 
         // Se ejecuta la primera consulta
         mysqli_stmt_execute($stmt);
