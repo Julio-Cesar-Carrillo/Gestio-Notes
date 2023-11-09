@@ -1,21 +1,25 @@
 <?php
 
 if (!isset($_GET['id'])) {
-    header('location: ./listado.php');
+    header('location: ./tabla.php');
     exit();
 } else {
 
-    $alumno = $_GET['id'];
+    $alumno_id = $_GET['id'];
 
     include_once("./procesos/conexion.php");
 
-    $sql = "SELECT * FROM tbl_alumnos WHERE id = ?";
+    $sql = "SELECT N.*, A.nombre as 'nombre', A.apellido as 'apellido' , M.nombre as 'asignatura' FROM tbl_notas N 
+    INNER JOIN tbl_alumnos A ON N.id_alumno = A.id 
+    INNER JOIN tbl_asignaturas M ON N.id_asignatura=M.id 
+    WHERE N.id_alumno=?;";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $alumno);
+    mysqli_stmt_bind_param($stmt, "i", $alumno_id);
     mysqli_stmt_execute($stmt);
     $resultado = mysqli_stmt_get_result($stmt);
 
     if (mysqli_num_rows($resultado) == 0) {
+        echo $alumno_id;
         echo "no hay ningún alumnos con ese ID";
         exit();
     }
@@ -34,21 +38,19 @@ if (!isset($_GET['id'])) {
     <body>
         <h2>Editar alumno</h2>
         <form action="./procesos/editar.php" method="post">
-            <input type="hidden" name="id" value="<?php echo $datos_alumno['id']; ?>">
+            <p><input type="hidden" name="id" value="<?php echo $alumno_id; ?>"></p>
 
-            <label for="nombre">nombre</label>
+            <label for="nombre">Alumno</label>
             <p><input type="text" name="nombre" value="<?php echo $datos_alumno['nombre']; ?>"></p>
 
-            <label for="apellido">apellido</label>
-            <p><input type="text" name="apellido" value="<?php echo $datos_alumno['apellido']; ?>"></p>
-            <label for="email">email</label>
-            <p><input type="text" name="email" value="<?php echo $datos_alumno['email']; ?>"></p>
+            <label for="apellido">Asignatura</label>
+            <p><input type="text" name="apellido" value="<?php echo $datos_alumno['asignatura']; ?>"></p>
 
-            <label for="contraseña">contraseña</label>
-            <p><input type="text" name="pwd" value="<?php echo $datos_alumno['pass']; ?>"></p>
+            <label for="email">Nota</label>
+            <p><input type="text" name="email" value="<?php echo $datos_alumno['nota']; ?>"></p>
 
-            <label for="telefono">telefono</label>
-            <p><input type="text" name="telefono" value="<?php echo $datos_alumno['telefono']; ?>"></p>
+            <label for="contraseña">fecha registro</label>
+            <p><input type="text" name="pwd" value="<?php echo $datos_alumno['fecha_registro']; ?>"></p>
 
             <input type="submit" name="editar" value="Guardar Cambios">
         </form>
