@@ -1,3 +1,11 @@
+/* PALETA DE COLORES
+.color1 { #066a87 };
+.color2 { #055a77 };
+.color3 { #034b66 };
+.color4 { #023b56 };
+.color5 { #002b45 }; 
+ ---------------- */
+
 * {
     box-sizing: border-box;
     /* scroll-behavior: inherit;

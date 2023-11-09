@@ -4,7 +4,7 @@
     $dbserver="localhost"; // Servidor
     $dbusername="root"; // Nombre de usuario
     $dbpassword=""; // Contraseña del usuario
-    $dbbasedatos="db_ies_contreras"; // Base de datos a la que nos queremos conectar
+    $dbbasedatos="db_gestionotes"; // Base de datos a la que nos queremos conectar
 
     // Con el bloque Try / Catch buscamos errores.
     try 

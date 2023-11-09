@@ -1,59 +1,72 @@
 <?php
-    session_start(); // Iniciamos la sesión.
+session_start(); // Iniciamos la sesión.
 
+<<<<<<< HEAD
     include('conexion.php'); // Incluimos el archivo de conexión a la base de datos.
+=======
+// Verifica si las variables de sesión 'user' y 'pass' están definidas
+if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) 
+{
+    session_destroy();
+    header('Location: ../index.php?error=Debes rellenar el formulario para acceder a check.php');
+    exit();
+}
 
-    // Preparamos una consulta SQL para buscar un profesor por nombre
-    $consulta = "SELECT * FROM tbl_profesores WHERE nombre_profe = ?";
-    if ($stmt = $conn->prepare($consulta))
-    {
-        $stmt->bind_param('s', $_SESSION['user']);
-        $stmt->execute();
-        $result = $stmt->get_result();
+include('conexion.php'); // Incluimos el archivo de conexión a la base de datos.
+>>>>>>> 705e812321be3495e6f9221a14a9ab0615d59756
 
-        // Si se encuentra un resultado (1 fila), verificamos la contraseña
-        if ($result->num_rows === 1) 
-        {
-            $fila = $result->fetch_assoc();
-            $contra_profe = $fila['contra_profe'];
-            $pass = $_SESSION['pass'];
-            $contra_encriptada = hash("sha256", $pass);
+// Preparamos una consulta SQL para buscar un profesor por nombre
+$sql = "SELECT * FROM tbl_alumnos WHERE email = ? and pass = ?";
+// Preparar la sentencia
+$stmt = mysqli_prepare($conn, $sql);
 
-            // Comparamos la contraseña almacenada con la contraseña proporcionada
-            if (hash_equals($contra_encriptada, $contra_profe)) 
-            {
-                ?>
-                    <!DOCTYPE html>
-                    <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Cerrar sesión</title>
-                            <link rel="stylesheet" href="../css/style.css">
-                        </head>
-                        
-                        <body>
-                            <div class="c-cerrar">
-                                <h2>¡Bienvenido <?php echo $_SESSION['user']; ?>! La contraseña es CORRECTA</h2> <!-- Se despide del usuario cogiendo la variable de sesión -->
-                                <img src='../img/iker.png' style="border-radius: 15px;">
-                                <form action="./cerrar_sesion.php" method="post">
-                                    <input type="submit" name="enviar" value="Cerrar Sesión">
-                                </form>
-                            </div>
-                        </body>
-                    </html>
-                <?php
-            } 
-            
-            else 
-            {
-                // Redirige de vuelta a la página de inicio en caso de usuario o contraseña incorrectas
-                header('Location: ../index.php?error=Usuario o contraseña INCORRECTAS');
-            }
+// Vincular los parámetros a la sentencia
+mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user'], $_SESSION['pass']);
+
+// Ejecutar la sentencia
+mysqli_stmt_execute($stmt);
+
+// Obtener el resultado
+$resultado = mysqli_stmt_get_result($stmt);
+
+
+if (mysqli_num_rows($resultado) > 0) {
+    header('Location: ../view/alumnos.php');
+}else {
+    $sql = "SELECT * FROM tbl_profesores WHERE email = ? and pass = ?";
+    // Preparar la sentencia
+    $stmt = mysqli_prepare($conn, $sql);
+
+    // Vincular los parámetros a la sentencia
+    mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user'], $_SESSION['pass']);
+
+    // Ejecutar la sentencia
+    mysqli_stmt_execute($stmt);
+
+    // Obtener el resultado
+    $resultado = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($resultado) > 0) {
+        header('Location: ../view/profesores.php');
+    }else{
+        $sql = "SELECT * FROM tbl_administradores WHERE email = ? and pass = ?";
+        // Preparar la sentencia
+        $stmt = mysqli_prepare($conn, $sql);
+    
+        // Vincular los parámetros a la sentencia
+        mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user'], $_SESSION['pass']);
+    
+        // Ejecutar la sentencia
+        mysqli_stmt_execute($stmt);
+    
+        // Obtener el resultado
+        $resultado = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($resultado) > 0) {
+            header('Location: ../view/admin.php');
+        }else{
+            session_destroy();
+            header('Location: ../index.php?error=Credenciales incorrectas, por favor, vuelva a intentarlo');
         }
-
-        $stmt->close();
     }
-
-    $conn->close(); // Cierra la conexión a la base de datos
-?>
+}
+session_destroy();
+header('Location: ../index.php?error=Credenciales incorrectas, por favor, vuelva a intentarlo');
