@@ -148,16 +148,17 @@ function validarTelefono(input)
         errorInput.style.borderColor = "red";
     } 
 
-    else if (!telefonoRegex.test(telefono)) 
+    else if (telefono.length !== 9 || !telefonoRegex.test(telefono)) 
     {
-        errorSpan.textContent = "Ingresa un numero de telefono válido (9 dígitos).";
+        errorSpan.textContent = "Ingresa un número de teléfono válido (9 dígitos).";
         errorSpan.style.color = "red";
         errorInput.style.borderColor = "red";
     } 
     
     else 
     {
-        errorSpan.textContent = "";
+        errorSpan.textContent = ""; // Limpiar el mensaje de error si es válido
+        errorInput.style.borderColor = "blue";
     }
 }
 
