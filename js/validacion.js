@@ -56,7 +56,8 @@ function validarEmail(input)
     const email = input.value;
     const errorSpan = document.getElementById("email_error");
     const errorInput = document.getElementById("email");
-    const emailRegex = /^[a-zA-Z0-9._-]+@[contreras]+\.[com]{3}$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const emailRegex2 = /^[a-zA-Z0-9._-]+@[contreras]+\.[com]{3}$/;
 
     if (email.trim() === "") 
     {
@@ -71,6 +72,13 @@ function validarEmail(input)
         errorSpan.style.color="red";
         errorInput.style.borderColor="red";
     } 
+
+    else if (!emailRegex2.test(email)) {
+        errorSpan.textContent = "Ingresa un correo que sea del dominio '@contreras.com'.";
+        errorSpan.style.color="red";
+        errorInput.style.borderColor="red";
+
+    }
     
     else 
     {

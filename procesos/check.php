@@ -2,13 +2,15 @@
 session_start(); // Iniciamos la sesión.
 
 // Verifica si las variables de sesión 'user' y 'pass' están definidas
-if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) 
+if (!isset($_SESSION['nombre']) || !isset($_SESSION['pwd'])) 
 {
     session_destroy();
+    // header('Location: ../index.php?error=Debes rellenar el formulario para acceder a check.php');
     header('Location: ../index.php?error=Debes rellenar el formulario para acceder a check.php');
     exit();
 }
-
+$user = $_SESSION['nombre'];
+$pwd = $_SESSION['pwd'];
 include('conexion.php'); // Incluimos el archivo de conexión a la base de datos.
 
 // Preparamos una consulta SQL para buscar un profesor por nombre
@@ -17,7 +19,7 @@ $sql = "SELECT * FROM tbl_alumnos WHERE email = ? and pass = ?";
 $stmt = mysqli_prepare($conn, $sql);
 
 // Vincular los parámetros a la sentencia
-mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user'], $_SESSION['pass']);
+mysqli_stmt_bind_param($stmt, "ss", $user, $pwd);
 
 // Ejecutar la sentencia
 mysqli_stmt_execute($stmt);
@@ -34,7 +36,7 @@ if (mysqli_num_rows($resultado) > 0) {
     $stmt = mysqli_prepare($conn, $sql);
 
     // Vincular los parámetros a la sentencia
-    mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user'], $_SESSION['pass']);
+    mysqli_stmt_bind_param($stmt, "ss", $user, $pwd);
 
     // Ejecutar la sentencia
     mysqli_stmt_execute($stmt);
@@ -49,7 +51,7 @@ if (mysqli_num_rows($resultado) > 0) {
         $stmt = mysqli_prepare($conn, $sql);
     
         // Vincular los parámetros a la sentencia
-        mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user'], $_SESSION['pass']);
+        mysqli_stmt_bind_param($stmt, "ss", $user, $pwd);
     
         // Ejecutar la sentencia
         mysqli_stmt_execute($stmt);
@@ -64,5 +66,3 @@ if (mysqli_num_rows($resultado) > 0) {
         }
     }
 }
-session_destroy();
-header('Location: ../index.php?error=Credenciales incorrectas, por favor, vuelva a intentarlo');
