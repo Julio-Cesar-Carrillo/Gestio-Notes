@@ -71,22 +71,22 @@ INSERT INTO `tbl_alumnos` (`id`, `nombre`, `apellido`, `email`, `pass`, `telefon
 (2, 'María', 'López', 'maria@contreras.com', 'qweQWE123', '987654321', 2),
 (3, 'Pedro', 'Martínez', 'pedro@contreras.com', 'qweQWE123', '564738291', 3),
 (4, 'Laura', 'Fernández', 'laura@contreras.com', 'qweQWE123', '192837465', 4),
-(5, 'Carlos', 'Pérez', 'carlos@contreras.com', 'qweQWE123', '293847165', 5),
+(5, 'Carlos', 'Pérez', 'carlos@contreras.com', 'qweQWE123', '293847165', 1),
 (6, 'Ana', 'Ramírez', 'ana@contreras.com', 'qweQWE123', '384927165', 1),
 (7, 'José', 'Gómez', 'jose@contreras.com', 'qweQWE123', '123487692', 2),
 (8, 'Sofía', 'Díaz', 'sofia@contreras.com', 'qweQWE123', '567823491', 3),
 (9, 'Miguel', 'Hernández', 'miguel@contreras.com', 'qweQWE123', '987165432', 4),
-(10, 'Lucía', 'Torres', 'lucia@contreras.com', 'qweQWE123', '218746935', 5),
+(10, 'Lucía', 'Torres', 'lucia@contreras.com', 'qweQWE123', '218746935', 2),
 (11, 'David', 'Vargas', 'david@contreras.com', 'qweQWE123', '394817625', 1),
 (12, 'Elena', 'Sánchez', 'elena@contreras.com', 'qweQWE123', '238746591', 2),
 (13, 'Luis', 'Molina', 'luis@contreras.com', 'qweQWE123', '947216538', 3),
 (14, 'Carmen', 'Ortega', 'carmen@contreras.com', 'qweQWE123', '284731965', 4),
-(15, 'Pablo', 'Jiménez', 'pablo@contreras.com', 'qweQWE123', '672934851', 5),
+(15, 'Pablo', 'Jiménez', 'pablo@contreras.com', 'qweQWE123', '672934851', 3),
 (16, 'Isabel', 'Reyes', 'isabel@contreras.com', 'qweQWE123', '384965172', 1),
 (17, 'Javier', 'Mendoza', 'javier@contreras.com', 'qweQWE123', '493716582', 2),
 (18, 'Raquel', 'Guerrero', 'raquel@contreras.com', 'qweQWE123', '192847365', 3),
 (19, 'Diego', 'Vega', 'diego@contreras.com', 'qweQWE123', '284765139', 4),
-(20, 'Paula', 'Campos', 'paula@contreras.com', 'qweQWE123', '129473856', 5);
+(20, 'Paula', 'Campos', 'paula@contreras.com', 'qweQWE123', '129473856', 1);
 
 -- --------------------------------------------------------
 
@@ -118,9 +118,9 @@ INSERT INTO `tbl_asignaturas` (`id`, `nombre`, `id_profesor`, `id_curso`) VALUES
 (10, 'Astronomía', 5, 4),
 (11, 'Educación Física Avanzada', 1, 4),
 (12, 'Geografía Mundial', 2, 4),
-(13, 'Educación Artística', 3, 5),
-(14, 'Tecnología e Informática', 4, 5),
-(15, 'Educación Cívica', 5, 5);
+(13, 'Educación Artística', 3, 3),
+(14, 'Tecnología e Informática', 4, 1),
+(15, 'Educación Cívica', 5, 3);
 
 -- --------------------------------------------------------
 
@@ -138,11 +138,10 @@ CREATE TABLE `tbl_cursos` (
 --
 
 INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES
-(1, 'Matemáticas'),
-(2, 'Historia'),
-(3, 'Lengua Española'),
-(4, 'Ciencias Naturales'),
-(5, 'Educación Física');
+(1, '1ESO'),
+(2, '2ESO'),
+(3, '3ESO'),
+(4, '4ESO')
 
 -- --------------------------------------------------------
 
@@ -248,12 +247,12 @@ INSERT INTO `tbl_profesores` (`id`, `nombre`, `apellido`, `email`, `pass`, `id_c
 (2, 'María', 'Martínez', 'maria.martinez@contreras.com', 'qweQWE123', 2),
 (3, 'José', 'Rodríguez', 'jose.rodriguez@contreras.com', 'qweQWE123', 3),
 (4, 'Ana', 'López', 'ana.lopez@contreras.com', 'qweQWE123', 4),
-(5, 'Carlos', 'Pérez', 'carlos.perez@contreras.com', 'qweQWE123', 5),
+(5, 'Carlos', 'Pérez', 'carlos.perez@contreras.com', 'qweQWE123', 2),
 (6, 'Laura', 'Gómez', 'laura.gomez@contreras.com', 'qweQWE123', 1),
 (7, 'Javier', 'Fernández', 'javier.fernandez@contreras.com', 'qweQWE123', 2),
 (8, 'Sandra', 'Díaz', 'sandra.diaz@contreras.com', 'qweQWE123', 3),
 (9, 'Pablo', 'Martín', 'pablo.martin@contreras.com', 'qweQWE123', 4),
-(10, 'Luis', 'Torres', 'luis.torres@contreras.com', 'qweQWE123', 5);
+(10, 'Luis', 'Torres', 'luis.torres@contreras.com', 'qweQWE123', 3);
 
 --
 -- Índices para tablas volcadas
