@@ -10,27 +10,33 @@ $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "i", $alumno_id);
 mysqli_stmt_execute($stmt);
 // Guardamos los datos de la consulta
-$alumnos = mysqli_stmt_get_result($stmt);
+$nota = mysqli_stmt_get_result($stmt);
 // Cerramos la consulta
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 
 
-if (mysqli_num_rows($alumnos) == 0) {
-    echo $alumno_id;
+if (mysqli_num_rows($nota) == 0) {
     echo "<p>No hay notas de este alumno.<p>
-          <button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
+    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
     ";
     exit();
-} elseif (mysqli_num_rows($alumnos) == 1) {
-    echo $alumno_id;
-    echo "<p>Aun faltan añadir 2 notas.<p>
+} elseif (mysqli_num_rows($nota) == 1) {
+    echo "<p>Aun faltan añadir 4 notas.<p>
           <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir notas restantes</a></button></p>
     ";
-} elseif (mysqli_num_rows($alumnos) == 2) {
-    echo $alumno_id;
+} elseif (mysqli_num_rows($nota) == 2) {
+    echo "<p>Aun falta añadir 3 nota.<p>
+    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
+    ";
+}elseif (mysqli_num_rows($nota) == 3) {
+    echo "<p>Aun falta añadir 2 nota.<p>
+    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
+    ";
+}
+elseif (mysqli_num_rows($nota) == 4) {
     echo "<p>Aun falta añadir 1 nota.<p>
-          <button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
+    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
     ";
 }
 ?>
@@ -53,7 +59,7 @@ if (mysqli_num_rows($alumnos) == 0) {
             <th>editar</th>
         </tr>
         <?php
-        foreach ($alumnos as $alumno) {
+        foreach ($nota as $alumno) {
             $fecha = date("d/m/Y", strtotime($alumno["fecha_registro"]));
             echo "<tr>
               <td> {$alumno["nombre"]} {$alumno["apellido"]} </td>  
