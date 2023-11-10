@@ -14,6 +14,25 @@ $alumnos = mysqli_stmt_get_result($stmt);
 // Cerramos la consulta
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
+
+
+if (mysqli_num_rows($alumnos) == 0) {
+    echo $alumno_id;
+    echo "<p>No hay notas de este alumno.<p>
+          <button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
+    ";
+    exit();
+} elseif (mysqli_num_rows($alumnos) == 1) {
+    echo $alumno_id;
+    echo "<p>Aun faltan añadir 2 notas.<p>
+          <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir notas restantes</a></button></p>
+    ";
+} elseif (mysqli_num_rows($alumnos) == 2) {
+    echo $alumno_id;
+    echo "<p>Aun falta añadir 1 nota.<p>
+          <button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
+    ";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,14 +54,14 @@ mysqli_close($conn);
         </tr>
         <?php
         foreach ($alumnos as $alumno) {
+            $fecha = date("d/m/Y", strtotime($alumno["fecha_registro"]));
             echo "<tr>
-              
-            
               <td> {$alumno["nombre"]} {$alumno["apellido"]} </td>  
               <td> {$alumno["asignatura"]} </td>
               <td> {$alumno["nota"]} </td>
-              <td> {$alumno["fecha_registro"]} </td>
-              <td><a href='./editar_nota.php?id={$alumno_id}'>editar</a>
+              <td> {$fecha} </td>
+              <td><a href='./editar_nota.php?id={$alumno_id}&id_asignatura={$alumno["id_asignatura"]}'>editar</a>
+              <td><a href='./tabla.php'>Volver a la tabla de alumnos</a>
               </tr>";
         }
         ?>

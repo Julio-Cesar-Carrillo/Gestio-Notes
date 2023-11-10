@@ -4,17 +4,18 @@ if (!isset($_GET['id'])) {
     header('location: ./tabla.php');
     exit();
 } else {
-
-    $alumno_id = $_GET['id'];
-
     include_once("./procesos/conexion.php");
 
-    $sql = "SELECT N.*, A.nombre as 'nombre', A.apellido as 'apellido' , M.nombre as 'asignatura' FROM tbl_notas N 
+    $alumno_id = $_GET['id'];
+    $asignatura_id = $_GET['id_asignatura'];;
+
+    $sql = "SELECT N.*, A.nombre as 'nombre', A.apellido as 'apellido' , M.nombre as 'asignatura' 
+    FROM tbl_notas N 
     INNER JOIN tbl_alumnos A ON N.id_alumno = A.id 
     INNER JOIN tbl_asignaturas M ON N.id_asignatura=M.id 
-    WHERE N.id_alumno=?;";
+    WHERE N.id_alumno=? AND N.id_asignatura= ?;";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $alumno_id);
+    mysqli_stmt_bind_param($stmt, "ii", $alumno_id,$asignatura_id);
     mysqli_stmt_execute($stmt);
     $resultado = mysqli_stmt_get_result($stmt);
 
@@ -25,6 +26,7 @@ if (!isset($_GET['id'])) {
     }
     // Almacenamos el resultado de la consulta en un array asociativo
     $datos_alumno = mysqli_fetch_assoc($resultado);
+    $fecha = date("d/m/Y", strtotime($datos_alumno["fecha_registro"]));
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -37,20 +39,20 @@ if (!isset($_GET['id'])) {
 
     <body>
         <h2>Editar alumno</h2>
-        <form action="./procesos/editar.php" method="post">
-            <p><input type="hidden" name="id" value="<?php echo $alumno_id; ?>"></p>
-
-            <label for="nombre">Alumno</label>
-            <p><input type="text" name="nombre" value="<?php echo $datos_alumno['nombre']; ?>"></p>
-
+        <form action="./procesos/editar_nota.php" method="post">
+            <input type="hidden" name="id" value="<?php echo $alumno_id; ?>">
+            
+            <p>nombre</p>
+            <p><?php echo $datos_alumno['nombre']; ?></p>
             <label for="apellido">Asignatura</label>
-            <p><input type="text" name="apellido" value="<?php echo $datos_alumno['asignatura']; ?>"></p>
+
+            <input type="hidden" name="asignatura" value="<?php echo $datos_alumno['id_asignatura']; ?>">
+            <p><?php echo $datos_alumno['asignatura']; ?></p>
 
             <label for="email">Nota</label>
-            <p><input type="text" name="email" value="<?php echo $datos_alumno['nota']; ?>"></p>
+            <p><input type="text" name="nota" value="<?php echo $datos_alumno['nota']; ?>"></p>
 
-            <label for="contraseña">fecha registro</label>
-            <p><input type="text" name="pwd" value="<?php echo $datos_alumno['fecha_registro']; ?>"></p>
+            <p for="contraseña"><?php echo $fecha; ?></p>
 
             <input type="submit" name="editar" value="Guardar Cambios">
         </form>

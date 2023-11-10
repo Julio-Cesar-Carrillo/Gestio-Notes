@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['id'])) {
-    header('location: ./listado.php');
+    header('location: ./tabla.php');
     exit();
 } else {
 
@@ -17,7 +17,7 @@ if (!isset($_GET['id'])) {
     $resultado = mysqli_stmt_get_result($stmt);
 
     if (mysqli_num_rows($resultado) == 0) {
-        echo "no hay ningún alumnos con ese ID";
+        header('location: ./tabla.php');
         exit();
     }
     // Almacenamos el resultado de la consulta en un array asociativo
@@ -34,44 +34,30 @@ if (!isset($_GET['id'])) {
 
     <body>
         <h2>Editar alumno</h2>
+        
         <form action="./procesos/editar_alumno.php" method="post">
             <input type="hidden" name="id" value="<?php echo $datos_alumno['id']; ?>">
 
-            <label for="nombre">nombre</label>
+            <label for="nombre">nombre:</label>
             <p><input type="text" name="nombre" value="<?php echo $datos_alumno['nombre']; ?>"></p>
 
             <label for="apellido">apellido</label>
             <p><input type="text" name="apellido" value="<?php echo $datos_alumno['apellido']; ?>"></p>
-            <label for="email">email</label>
+            <label for="email">email:</label>
             <p><input type="text" name="email" value="<?php echo $datos_alumno['email']; ?>"></p>
 
-            <label for="contraseña">contraseña</label>
+            <label for="contraseña">contraseña:</label>
             <p><input type="text" name="pwd" value="<?php echo $datos_alumno['pass']; ?>"></p>
 
-            <label for="telefono">telefono</label>
+            <label for="telefono">telefono:</label>
             <p><input type="text" name="telefono" value="<?php echo $datos_alumno['telefono']; ?>"></p>
-            <label>Curso:</label><br>
-            <select name="curso" id="curso">
-                <option value="" disabled selected>-- Escoge una opción --</option> <?php
-                include('./procesos/conexion.php');
-                $sqlSelectCurso = "SELECT * FROM tbl_cursos;";
-                $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso);
-
-                if (mysqli_num_rows($resultadoSelectCurso) > 0) {
-                    while ($row = mysqli_fetch_assoc($resultadoSelectCurso)) {
-                        $curso = $row['nombre'];
-                        $curso_id = $row['id'];
-                        echo "<option value='$curso_id'>$curso</option>";
-                    }
-                }
-                ?>
-            </select>
-            <span id="curso_error" class="error" style="color: red;"></span>
+            <label>Curso:</label>
+            <p><?php echo $datos_alumno['curso']; ?></p>
 
             <input type="submit" name="editar" value="Guardar Cambios">
+            
+            <button><a href="./tabla.php">Volver a la tabla</a></button>
         </form>
-
-
     </body>
 
     </html>

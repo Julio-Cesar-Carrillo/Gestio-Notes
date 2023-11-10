@@ -22,11 +22,11 @@ if (!isset($_POST['editar'])) {
 
         mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
         $sql_pedido = "UPDATE tbl_alumnos
-                        SET nombre = ?, apellido = ?, email = ?, pass = ?, telefono = ? id_curso=?
+                        SET nombre = ?, apellido = ?, email = ?, pass = ?, telefono = ?
                         WHERE id = ?";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql_pedido);
-        mysqli_stmt_bind_param($stmt, "ssssssi", $nombre, $apellido, $email, $pwd, $telefono, $curso ,$alumno_id);
+        mysqli_stmt_bind_param($stmt, "sssssi", $nombre, $apellido, $email, $pwd, $telefono ,$alumno_id);
 
         // Se ejecuta la primera consulta
         mysqli_stmt_execute($stmt);
