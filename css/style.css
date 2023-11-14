@@ -14,7 +14,8 @@
     /* width: 100%; */
     font-family: 'Dosis', sans-serif;
     /* font-family: 'Lora', serif; */
-    overflow: hidden
+    overflow-x: hidden;
+    overflow-y:auto;
 }
 ::-webkit-scrollbar {
     display: none;
@@ -126,6 +127,13 @@ form button:hover {
 
 .c-cerrar input[type="submit"]:hover {
     background-color: #023b56;
+}
+.panel {
+    margin: 2% 10%;
+    overflow: scroll;
+}
+.form-m {
+    margin: 2% 10%;
 }
 
 @media only screen and (max-width: 468px) {

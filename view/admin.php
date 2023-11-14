@@ -5,52 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de control</title>
     <link rel="stylesheet" href="../css/style.css">
+    <!-- BOOSTRAP -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body>
-    <h1>Administrador</h1>
-    <table>
-        <thead>
+<body id="">
+<div class="panel">
+    <h1>Hola Admin!</h1>
+    <table class="table" border="1">
+        <thead class="thead-dark">
             <tr>
-                <th>Nombre y Apellido/s</th>
-                <th>Email</th>
-                <th>Contraseña</th>
-                <th>Teléfono</th>
-                <th>Curso</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th scope="col">Nombre y Apellido/s</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contraseña</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
             </tr>
         </thead>
         <tbody>
-                <?php 
-                include_once("../procesos/conexion.php");
-                $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido as apellido, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id;";
-                // Preparar la sentencia
-                $stmt = mysqli_prepare($conn, $sql);
+            <?php
+            include_once("../procesos/conexion.php");
+            $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido as apellido, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id";
 
-                // Vincular los parámetros a la sentencia
-                // mysqli_stmt_bind_param($stmt, "ss", $user, $pwd);
+// Obtener el número total de filas
+$result = mysqli_query($conn, $sql);
+$totalRows = mysqli_num_rows($result);
 
-                // Ejecutar la sentencia
-                mysqli_stmt_execute($stmt);
+// Número de filas a mostrar por página
+$rowsPerPage = 8;
 
-                // Obtener el resultado
-                $resultado = mysqli_stmt_get_result($stmt);
-                if (mysqli_num_rows($resultado) > 0) {
-                    while ($row = mysqli_fetch_assoc($resultado)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['nombre'] . " " . $row['apellido'] . "</td>";
-                        echo "<td>" . $row['email'] . "</td>";
-                        echo "<td>" . $row['pass'] . "</td>";
-                        echo "<td>" . $row['telefono'] . "</td>";
-                        echo "<td>" . $row['curso'] . "</td>";
-                        echo "<td><a href='modificar.php'>Modificar'</a></td>";
-                        echo "<td><a href='../procesos/eliminar.php'>Eliminar'</a></td>";
-                        echo "</tr>";
+// Número total de páginas
+$totalPages = ceil($totalRows / $rowsPerPage);
 
-                    }
+// Página actual (si no se especifica, se establece en la primera página)
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Calcular el punto de inicio para la consulta
+$startRow = ($currentPage - 1) * $rowsPerPage;
+
+// Consulta SQL con LIMIT para la paginación
+$sql .= " LIMIT $startRow, $rowsPerPage";
+
+$result = mysqli_query($conn, $sql);
+
+
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['nombre'] . " " . $row['apellido'] . "</td>";
+                    echo "<td>" . $row['email'] . "</td>";
+                    echo "<td>" . $row['pass'] . "</td>";
+                    echo "<td>" . $row['telefono'] . "</td>";
+                    echo "<td>" . $row['curso'] . "</td>";
+                    echo "<td><a href='./procesos/editar_alumno.php?id=" . $row['id'] . "'>Modificar</a></td>";
+                    echo "<td><a href='./procesos/eliminar.php?id=" . $row['id'] . "'>Eliminar</a></td>";
+                    echo "</tr>";
                 }
-                ?>
+            }
+            ?>
         </tbody>
     </table>
+
+    <!-- Paginación -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <?php
+            for ($i = 1; $i <= $totalPages; $i++) {
+                echo "<li class='page-item " . ($i == $currentPage ? 'active' : '') . "'>";
+                echo "<a class='page-link' href='?page=$i'>$i</a>";
+                echo "</li>";
+            }
+            ?>
+        </ul>
+    </nav>
+</div>
 </body>
 </html>
