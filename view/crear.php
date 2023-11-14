@@ -9,7 +9,7 @@
 
     <body>
         <form action="./procesos/crear.php" method="post" id="formularioCrear">
-        <label for="nombre">Nombre:</label>
+            <label for="nombre">Nombre:</label>
             <!-- Campo de entrada para el nombre -->
             <input type="text" id="nombre" name="nombre" oninput="validarNombre(this)"> <!-- Llama a la función validarNombre cuando detecta cambios en el input -->
             <!-- Mensaje de error para la validación del nombre -->
@@ -55,37 +55,35 @@
             <br><br>
 
             <label>Curso:</label><br>
-                <?php
-                    include('../procesos/conexion.php'); /* Incluimos el fichero de conexión a la base de datos */
+            <?php
+                    include('../procesos/conexion.php');
 
-                    $sqlSelectCurso = "SELECT nombre FROM tbl_cursos;"; /* SQL para seleccionar el nombre de los cursos de la tabla tbl_cursos */
-                    $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso); /* Resultado del SQL */
+                    $sqlSelectCurso = "SELECT id, nombre FROM tbl_cursos;";
+                    $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso);
 
-                    if (mysqli_num_rows($resultadoSelectCurso) > 0) /* Comprueba si hay resultados */
+                    if (mysqli_num_rows($resultadoSelectCurso) > 0) 
                     {
-                        echo "<select name='curso' id='curso' onchange='validarCurso(this)'>"; /* Selector de opciones */
-                            echo "<option value='' selected> -- Escoge una opción -- </option>"; // Opcíon por defecto, Deshabilitada para que no se pueda seleccionar 
+                        echo "<select name='curso' id='curso' onchange='validarCurso(this)'>";
+                            echo "<option value='' selected> -- Escoge una opción -- </option>";
 
-                            while ($row = mysqli_fetch_assoc($resultadoSelectCurso)) // Si hay resultados...
+                            while ($row = mysqli_fetch_assoc($resultadoSelectCurso)) 
                             {
-                                $curso = $row['nombre']; /* Almacena en una variable el nombre del curso */
+                                $curso = $row['nombre'];
                                 $id_curso = $row['id'];
-                                echo "<option value='$id_curso'>$curso</option>"; /* Imprime el nombre del curso */
+                                echo "<option value='$id_curso'>$curso</option>";
                             }
                         echo "</select>";
                         echo "<br>";
-                        echo "<span id='curso_error' class='error'</span>"; /* Mensaje de error */
-                    }
-
-                    else 
-                    {
-                        echo "No se han encontrado cursos"; // Mensaje de error.
+                        echo "<span id='curso_error' class='error'></span>";
+                    } else {
+                        echo "No se han encontrado cursos";
                     }
                 ?>
-            
+        
             <br><br>
 
-            <input type="submit" value="Enviar" id="enviarButton" disabled>        
+            <input type="submit" value="Enviar" id="enviarButton" disabled>     
+            <button><a href="./tabla.php">Volver a la tabla</a></button>   
         </form>
 
         <script>
@@ -111,16 +109,16 @@
                 }
             }
             
-            // Agregar eventos 'input' a los campos para llamar a la función de validación
-            document.getElementById("nombre").addEventListener("input", validarFormulario);
-            document.getElementById("apellido").addEventListener("input", validarFormulario);
-            document.getElementById("email").addEventListener("input", validarFormulario);
-            document.getElementById("pwd").addEventListener("input", validarFormulario);
-            document.getElementById("telefono").addEventListener("input", validarFormulario);
-            document.getElementById("curso").addEventListener("change", validarFormulario); // Cambio en el campo de selección
+                // Agregar eventos 'input' a los campos para llamar a la función de validación
+                document.getElementById("nombre").addEventListener("input", validarFormulario);
+                document.getElementById("apellido").addEventListener("input", validarFormulario);
+                document.getElementById("email").addEventListener("input", validarFormulario);
+                document.getElementById("pwd").addEventListener("input", validarFormulario);
+                document.getElementById("telefono").addEventListener("input", validarFormulario);
+                document.getElementById("curso").addEventListener("change", validarFormulario); // Cambio en el campo de selección
 
-            // Llamar a la función de validación inicialmente
-            validarFormulario();
+                // Llamar a la función de validación inicialmente
+                validarFormulario();
         </script>
     </body>
 </html>

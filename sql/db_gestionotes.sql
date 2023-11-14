@@ -138,11 +138,11 @@ CREATE TABLE `tbl_cursos` (
 --
 
 INSERT INTO `tbl_cursos` (`id`, `nombre`) VALUES
-(1, 'Matemáticas'),
-(2, 'Historia'),
-(3, 'Lengua Española'),
-(4, 'Ciencias Naturales'),
-(5, 'Educación Física');
+(1, 'SMX1'),
+(2, 'SMX2'),
+(3, 'ASIX1'),
+(4, 'ASIX2'),
+(5, 'DAW2');
 
 -- --------------------------------------------------------
 
