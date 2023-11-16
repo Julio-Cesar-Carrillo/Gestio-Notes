@@ -97,7 +97,7 @@
         <?php
         foreach ($alumnos as $alumno) {
             echo "<tr>
-              <td> {$alumno["nombre"]} {$alumno["apellido"]} </td>   
+              <td> {$alumno["nombre"]} {$alumno["apellido1"]} </td>   
               <td> {$alumno["email"]} </td>
               <td> {$alumno["pass"]} </td>
               <td> {$alumno["telefono"]} </td>
@@ -131,7 +131,7 @@
                     echo 
                     "
                         <tr>
-                            <td> {$alumno["nombre"]} {$alumno["apellido"]} </td>   
+                            <td> {$alumno["nombre"]} {$alumno["apellido1"]} </td>   
                             <td> {$alumno["email"]} </td>
                             <td> {$alumno["pass"]} </td>
                             <td> {$alumno["telefono"]} </td>

@@ -25,9 +25,8 @@
     $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 
     // Consulta para obtener los usuarios de la página actual con el filtro de nombre
-    $contenidoTabla = "SELECT a.nombre, a.apellido1, a.apellido2, a.email, c.nombre as curso FROM tbl_alumnos a LEFT JOIN tbl_cursos c ON a.id_curso = c.id 
+    $contenidoTabla = "SELECT a.id ,a.nombre, a.apellido1, a.apellido2, a.email, c.nombre as curso FROM tbl_alumnos a LEFT JOIN tbl_cursos c ON a.id_curso = c.id 
     $condicionNombre 
-    ORDER BY a.nombre ASC
     LIMIT $inicio, $usuariosPorPagina";
     
     $condicionNombre;
@@ -75,23 +74,36 @@
             <table class="mi-tabla">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>1r Apellido</th>
                         <th>2o Apellido</th>
                         <th>Email</th>
                         <th>Clase</th>
+                        <th>Editar</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <?php
-                        if ($resultadoContenidoTabla) {
-                            while ($fila = mysqli_fetch_assoc($resultadoContenidoTabla)) {
+                        if ($resultadoContenidoTabla) 
+                        {
+                            while ($fila = mysqli_fetch_assoc($resultadoContenidoTabla)) {    
+                                $id = $fila['id'];     
                                 echo "<tr>";
-
-                                foreach ($fila as $valor) {
-                                    echo "<td>$valor</td>";
-                                }
+                                    foreach ($fila as $valor) 
+                                    {
+                                        echo "<td>$valor</td>";
+                                    }
+                                    ?>
+                                        <td>
+                                            <form action="ver_nota.php" method="post">
+                                                <input type="hidden" name="id" value="<?php echo $fila['id'] ?>">
+                                                <input type="submit" name="envar" value="Editar">
+                                            </form>
+                                        </td>
+                                    <?php
+                                echo "</tr>";
                             }
                         }
                     ?>
