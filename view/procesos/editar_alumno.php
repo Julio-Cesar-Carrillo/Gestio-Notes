@@ -23,7 +23,8 @@ include_once('./conexion.php');
 
     $id = $_GET['id'];
 
-    try {
+    try 
+    {
         mysqli_autocommit($conn, false);
         mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
         $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido as apellido, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id WHERE tbl_alumnos.id = ?";
@@ -37,7 +38,8 @@ include_once('./conexion.php');
         mysqli_stmt_execute($stmt);
         $resultado = mysqli_stmt_get_result($stmt);
         if (mysqli_num_rows($resultado) > 0) {
-            while ($row = mysqli_fetch_assoc($resultado)) {
+            while ($row = mysqli_fetch_assoc($resultado)) 
+            {
                 ?>
                 <div class="form-m">
                 <form action="../../procesos/update.php" method="post">
