@@ -19,7 +19,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Lora&display=swap" rel="stylesheet">
     </head>
 
-    <body>
+    <body id="index">
         <div class="f-login">
             <div class="logo">
                 <img src="img/logo.png" alt="Error al cargar el logo" srcset="">

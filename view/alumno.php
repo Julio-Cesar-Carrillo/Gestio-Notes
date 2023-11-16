@@ -6,6 +6,7 @@
     <title>Panel de Control</title>
 </head>
 <body>
-    <h1>Pantalla profesor</h1>
+    <h1>Pantalla Alumno</h1>
 </body>
+</html>
 </html>

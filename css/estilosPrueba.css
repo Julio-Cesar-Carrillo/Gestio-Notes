@@ -1,0 +1,154 @@
+*
+{
+    margin: 0;
+}
+
+body
+{
+    background-color: burlywood;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#encabezado 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(98, 95, 95); /* Puedes ajustar el color de fondo según tus preferencias */
+}
+
+#cont-logo,
+#cont-filtro,
+#cont-texto 
+{
+    margin: 0; /* Asegura que no haya márgenes predeterminados */
+    color: white;
+}
+
+#cont-texto 
+{
+    margin-right: 20px; /* Ajusta el margen derecho según tus preferencias */
+}
+
+#cont-filtro form 
+{
+    display: flex;
+    align-items: center;
+}
+
+#cont-filtro label,
+#cont-filtro input,
+#cont-filtro button 
+{
+    margin-right: 10px; /* Ajusta el espacio entre los elementos según tus preferencias */
+}
+
+#logo 
+{
+    width: 10%;
+}
+
+#cont-tabla {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.mi-tabla {
+    width: 80%; /* Ajusta el ancho según tus necesidades */
+    margin: 20px auto; /* Márgenes a la izquierda y derecha */
+    border-collapse: collapse;
+    margin-top: 20px; /* Espacio entre la tabla y el contenido superior */
+    background-color: #f2f2f2;
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para ocultar los bordes redondeados en las esquinas de la tabla */
+}
+
+.mi-tabla th{
+    background-color: #333;
+    color: white;
+}
+
+.mi-tabla th, .mi-tabla td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.editar-enlace, .eliminar-enlace {
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+#cont-paginacion {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li {
+    display: inline;
+    margin-right: 5px;
+}
+
+.pagination li a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.pagination li.active a {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#form-busqueda {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#nombre {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#boton {
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#boton:hover {
+    background-color: #45a049;
+}
+
+.eliminar-filtro {
+    padding: 8px 12px;
+    background-color: rgb(233, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;}
+
+
+
