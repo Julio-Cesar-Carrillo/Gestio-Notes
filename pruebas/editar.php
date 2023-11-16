@@ -17,14 +17,16 @@ mysqli_close($conn);
 
 if (mysqli_num_rows($nota) == 0) {
     echo "<p>No hay notas de este alumno.<p>
-    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>";
+          <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>";
     exit();
 } elseif (mysqli_num_rows($nota) == 1) {
     echo "<p>Aun faltan añadir 2 notas.<p>
           <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir notas restantes</a></button></p>";
+    exit();
 } elseif (mysqli_num_rows($nota) == 2) {
     echo "<p>Aun falta añadir 1 nota.<p>
-    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>";
+          <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>";
+    exit();
 }
 
 ?>
@@ -57,7 +59,7 @@ if (mysqli_num_rows($nota) == 0) {
               <td> {$alumno["nota"]} </td>
               <td> {$fecha} </td>
               <td><a href='./editar_nota.php?id={$alumno_id}'>editar</a>
-              <td><a href='./tabla.php'>Volver a la tabla de alumnos</a>
+              <td><a href='./tabla.php'>Volver</a>
               </tr>";
         }
         ?>
