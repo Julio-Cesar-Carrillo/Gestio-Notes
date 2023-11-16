@@ -8,6 +8,7 @@ if (!isset($_POST['editar'])) {
     include_once('./conexion.php');
 
     $alumno_id = $_POST['id'];
+    $id_curso=$_GET['asig_id'];
     $asignatura_id = mysqli_real_escape_string($conn, $_POST['asignatura']);
     $nota = mysqli_real_escape_string($conn, $_POST['nota']);
     echo $alumno_id . "<br>";
@@ -36,7 +37,7 @@ if (!isset($_POST['editar'])) {
 
 
         // Redirigimos a la página de listado del CRUD
-        header("Location: ../notas.php?id={$alumno_id}");
+        header("Location: ../notas.php?id={$alumno_id}&id_asignatura={$id_curso}");
     } catch (Exception $e) {
         mysqli_rollback($conn);
         echo 'Error: ' . $e->getMessage() . '';

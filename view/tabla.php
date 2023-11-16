@@ -41,7 +41,7 @@ mysqli_close($conn);
               <td> {$alumno["pass"]} </td>
               <td> {$alumno["telefono"]} </td>
               <td> {$alumno["curso"]} </td>
-              <td><a href='./notas.php?id={$alumno['id']}'>notas</a>
+              <td><a href='./notas.php?id={$alumno['id']}&id_asignatura={$alumno["id_curso"]}'>notas</a>
               <td><a href='./editar_alumno.php?id={$alumno['id']}'>editar</a>
               <td><a href='./procesos/eliminar.php?id={$alumno['id']}'>aliminar</a>
               </tr>";

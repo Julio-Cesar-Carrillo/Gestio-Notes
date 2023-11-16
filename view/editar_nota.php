@@ -7,8 +7,9 @@ if (!isset($_GET['id'])) {
     include_once("./procesos/conexion.php");
 
     $alumno_id = $_GET['id'];
-    $asignatura_id = $_GET['id_asignatura'];;
-
+    $asignatura_id = $_GET['asignatura'];
+    $id_curso=$_GET['id_asignatura'];
+    echo $id_curso;
     $sql = "SELECT N.*, A.nombre as 'nombre', A.apellido as 'apellido' , M.nombre as 'asignatura' 
     FROM tbl_notas N 
     INNER JOIN tbl_alumnos A ON N.id_alumno = A.id 
@@ -41,6 +42,7 @@ if (!isset($_GET['id'])) {
         <h2>Editar alumno</h2>
         <form action="./procesos/editar_nota.php" method="post">
             <input type="hidden" name="id" value="<?php echo $alumno_id; ?>">
+            <input type="hidden" name="asig_id" value="<?php echo $id_curso; ?>">
             
             <p>nombre</p>
             <p><?php echo $datos_alumno['nombre']; ?></p>

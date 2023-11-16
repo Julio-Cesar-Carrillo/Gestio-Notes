@@ -7,6 +7,8 @@ if (!isset($_GET['id'])) {
     include_once("./procesos/conexion.php");
 
     $alumno_id = $_GET['id'];
+    $id_curso=$_GET['id_asignatura'];
+    echo $id_curso;
 
     $sql = "SELECT * FROM tbl_alumnos WHERE id=?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -29,25 +31,19 @@ if (!isset($_GET['id'])) {
         <h2>Creando nota para: <?php echo $datos_alumno['nombre']; ?></h2>
         <form action="./procesos/crear_nota.php" method="post">
             <input type="hidden" name="id" value="<?php echo $alumno_id; ?>">
-            
+            <input type="hidden" name="id_asignatura" value="<?php echo $id_curso; ?>">
             <p>Asignatura</p>
             <?php
-            $sqlSelectCurso = "SELECT id, nombre FROM tbl_cursos;";
+            $sqlSelectCurso = "SELECT * FROM tbl_asignaturas WHERE id_curso=$id_curso;";
             $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso);
-
-            if (mysqli_num_rows($resultadoSelectCurso) > 0) 
-            {
-                echo "<select name='curso' id='curso' onchange='validarCurso(this)'>";
-                    echo "<option value='' selected> -- Escoge una opción -- </option>";
-
-                    while ($row = mysqli_fetch_assoc($resultadoSelectCurso)) 
-                    {
-                        $curso = $row['nombre'];
-                        $id_curso = $row['id'];
+            echo "<select name='curso' id='curso' onchange='validarCurso(this)'>";
+            echo "<option value='' selected> -- Escoge una opción -- </option>";
+            foreach ($resultadoSelectCurso as $asignatura){
+                        $curso = $asignatura['nombre'];
+                        $id_curso = $asignatura['id'];
                         echo "<option value='$id_curso'>$curso</option>";
-                    }
-                echo "</select>";
             }
+            echo "</select>";
             ?>
 
             <p>Nota</p>

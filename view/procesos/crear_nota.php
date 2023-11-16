@@ -2,10 +2,10 @@
 try {
     // Recogida de datos
     $alumno_id = $_POST["id"];
+    $id_curso=$_POST["id_asignatura"];
     $curso = $_POST["curso"];
     $nota = $_POST["nota"];
     include_once("./conexion.php");
-
     mysqli_autocommit($conn, false);
     mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
     // Definimos la consulta
@@ -19,7 +19,7 @@ try {
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 
-    header("Location: ../notas.php?id={$alumno_id}");
+    header("Location: ../notas.php?id={$alumno_id}&id_asignatura={$id_curso}");
 } catch (Exception $e) {
     // Deshacemos las inserciones en el caso de que se genere alguna excepción
     echo "Error: " . $e->getMessage() . "";

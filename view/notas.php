@@ -1,5 +1,6 @@
 <?php
 $alumno_id = $_GET['id'];
+$id_asignatura = $_GET['id_asignatura'];
 include_once("./procesos/conexion.php");
 // Consulta para mostar la tabla de los alumnos
 $sql = "SELECT N.*, A.nombre as 'nombre', A.apellido as 'apellido' , M.nombre as 'asignatura' FROM tbl_notas N 
@@ -15,30 +16,18 @@ $nota = mysqli_stmt_get_result($stmt);
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 
-
 if (mysqli_num_rows($nota) == 0) {
     echo "<p>No hay notas de este alumno.<p>
-    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
-    ";
+    <p><button><a href='./crear_nota.php?id={$alumno_id}&id_asignatura={$id_asignatura}'>Añadir nota ahora</a></button></p>";
     exit();
 } elseif (mysqli_num_rows($nota) == 1) {
-    echo "<p>Aun faltan añadir 4 notas.<p>
-          <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir notas restantes</a></button></p>
-    ";
+    echo "<p>Aun faltan añadir 2 notas.<p>
+          <p><button><a href='./crear_nota.php?id={$alumno_id}&id_asignatura={$id_asignatura}'>Añadir notas restantes</a></button></p>";
 } elseif (mysqli_num_rows($nota) == 2) {
-    echo "<p>Aun falta añadir 3 nota.<p>
-    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
-    ";
-}elseif (mysqli_num_rows($nota) == 3) {
-    echo "<p>Aun falta añadir 2 nota.<p>
-    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
-    ";
-}
-elseif (mysqli_num_rows($nota) == 4) {
     echo "<p>Aun falta añadir 1 nota.<p>
-    <p><button><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button></p>
-    ";
+    <p><button><a href='./crear_nota.php?id={$alumno_id}&id_asignatura={$id_asignatura}'>Añadir nota ahora</a></button></p>";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +48,7 @@ elseif (mysqli_num_rows($nota) == 4) {
             <th>editar</th>
         </tr>
         <?php
+
         foreach ($nota as $alumno) {
             $fecha = date("d/m/Y", strtotime($alumno["fecha_registro"]));
             echo "<tr>
@@ -66,7 +56,7 @@ elseif (mysqli_num_rows($nota) == 4) {
               <td> {$alumno["asignatura"]} </td>
               <td> {$alumno["nota"]} </td>
               <td> {$fecha} </td>
-              <td><a href='./editar_nota.php?id={$alumno_id}&id_asignatura={$alumno["id_asignatura"]}'>editar</a>
+              <td><a href='./editar_nota.php?id={$alumno_id}&asignatura={$alumno["id_asignatura"]}&id_asignatura={$id_asignatura}'>editar</a>
               <td><a href='./tabla.php'>Volver a la tabla de alumnos</a>
               </tr>";
         }
