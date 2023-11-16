@@ -49,20 +49,23 @@ if (mysqli_num_rows($nota) == 0) {
             <th>Editar</th>
             <th>Tabla</th>
         </tr>
-        <?php
-
-        foreach ($nota as $alumno) {
-            $fecha = date("d/m/Y", strtotime($alumno["fecha_registro"]));
-            echo "<tr>
-              <td> {$alumno["nombre"]} {$alumno["apellido"]} {$alumno["apellido2"]} </td>  
-              <td> {$alumno["asignatura"]} </td>
-              <td> {$alumno["nota"]} </td>
-              <td> {$fecha} </td>
-              <td><a href='./editar_nota.php?id={$alumno_id}'>editar</a>
-              <td><a href='./tabla.php'>Volver</a>
-              </tr>";
-        }
-        ?>
+        <form action="editar_nota.php" method="post">
+            <?php
+            foreach ($nota as $alumno) {
+                $fecha = date("d/m/Y", strtotime($alumno["fecha_registro"]));
+                echo "
+                    <input type='hidden' name='id' value='{$alumno['id']}'>
+                    <td><label>{$alumno["nombre"]} {$alumno["apellido"]} {$alumno["apellido2"]}</label></td>
+                    <td><label>{$alumno["asignatura"]}</label></td>
+                    <td><input type='text' value='{$alumno["nota"]}'></td>
+                    <td><label>{$fecha}</label></td>
+                    <td><input type='submit' name='enviar' value='Editar'></td>
+                    <td><a href='./tabla.php'>Volver</a>
+                    </tr>
+            ";
+            }
+            ?>
+        </form>
     </table>
 </body>
 
