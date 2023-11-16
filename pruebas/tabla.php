@@ -97,7 +97,7 @@
                                     }
                                     ?>
                                         <td>
-                                            <form action="editar.php" method="post">
+                                            <form action="ver_nota.php" method="post">
                                                 <input type="hidden" name="id" value="<?php echo $fila['id'] ?>">
                                                 <input type="submit" name="envar" value="Editar">
                                             </form>
