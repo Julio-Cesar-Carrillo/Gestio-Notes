@@ -34,6 +34,7 @@ html, body{
     color: white;
 }
 
+
 .f-login {
     background-color: #023b569d;
     width: 50%;
@@ -128,9 +129,11 @@ form button:hover {
 .c-cerrar input[type="submit"]:hover {
     background-color: #023b56;
 }
+#admin {
+    overflow: hidden;
+}
 .panel {
-    margin: 2% 10%;
-    overflow: scroll;
+    margin: 2% 3%;
 }
 .form-m {
     margin: 2% 10%;

@@ -27,7 +27,7 @@ include_once('./conexion.php');
     {
         mysqli_autocommit($conn, false);
         mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
-        $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido as apellido, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id WHERE tbl_alumnos.id = ?";
+        $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido1 as apellido1, tbl_alumnos.apellido2 as apellido2, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id WHERE tbl_alumnos.id = ?";
     
         $stmt = mysqli_prepare($conn, $sql);
     
@@ -46,47 +46,61 @@ include_once('./conexion.php');
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputEmail4">Nombre</label>
-                        <input type="text" class="form-control" placeholder="Nombre" value="<?php echo $row['nombre']; ?>">
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $row['nombre']; ?>">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="inputEmail4">Apellido</label>
-                        <input type="text" class="form-control" placeholder="Apellido" value="<?php echo $row['apellido']; ?>">
+                        <label for="inputEmail4">Primer Apellido</label>
+                        <input type="text" class="form-control" name="apellido1" placeholder="Primer Apellido" value="<?php echo $row['apellido1']; ?>">
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputEmail4">Email</label>
-                        <input type="text" class="form-control" placeholder="Email" value="<?php echo $row['email']; ?>">
+                    <div class="form-group col-md-3">
+                        <label for="inputEmail4">Segundo Apellido</label>
+                        <input type="text" class="form-control" name="apellido2" placeholder="Segundo Apellido" value="<?php echo $row['apellido2']; ?>">
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="inputEmail4">Teléfono</label>
-                        <input type="text" class="form-control" placeholder="Teléfono" value="<?php echo $row['telefono']; ?>">
-                    </div>
-                </div>
-                    <th><input type="text" name="pass" value="<?php echo $row['pass']; ?>"></th>
-                    <select name="lenguajes" id="lang">
+                    <div class="form-group col-md-3">
+                        <label for="inputEmail4">Curso</label>
+                        <select name="lenguajes" id="lang" class="form-control">
                         <?php 
                         $id = $row['id'];
                         $curso = $row['curso'];
-                        $sql = "SELECT * FROM `tbl_cursos`;";
+                        $sql2 = "SELECT * FROM `tbl_cursos`;";
         
-                        $stmt = mysqli_prepare($conn, $sql);
+                        $stmt2 = mysqli_prepare($conn, $sql2);
 
                         // Vincular los parámetros a la sentencia
                         // mysqli_stmt_bind_param($stmt, "s", $row['curso']);
                         
                         // Ejecutar la sentencia
-                        mysqli_stmt_execute($stmt);
-                        $resultado = mysqli_stmt_get_result($stmt);
-                        if (mysqli_num_rows($resultado) > 0) {
-                        while ($row = mysqli_fetch_assoc($resultado)) {
+                        mysqli_stmt_execute($stmt2);
+                        $resultado2 = mysqli_stmt_get_result($stmt2);
+                        if (mysqli_num_rows($resultado2) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($resultado2)) {
                             if ($row["nombre"] === $curso) {
-                                echo "<option value='" . $row['id'] . "' selected>" . $row['nombre'] . "</option>";     
+                                echo "<option value='" . $row2['id'] . "' selected>" . $row2['nombre'] . "</option>";     
                             }else {
-                                echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";     
+                                echo "<option value='" . $row2['id'] . "'>" . $row2['nombre'] . "</option>";     
                             }
                         }
                         }?>
                     </select>
-                    <th><input type="submit" value="Modificar"></th>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="inputEmail4">Email</label>
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email']; ?>">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputEmail4">Contraseña</label>
+                        <input type="text" class="form-control" name="pass" placeholder="Contraseña" value="<?php echo $row['pass']; ?>">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputEmail4">Teléfono</label>
+                        <input type="text" class="form-control" name="telf" placeholder="Teléfono" value="<?php echo $row['telefono']; ?>">
+                    </div>
+                </div>
+                
+
+                    <th><input type="submit" class="btn btn-primary mb-2" value="Modificar" style="float: right;"></th>
                     <th><input type="text" style="visibility: hidden; width: 0;" name="id" value="<?php echo $id; ?>"></th>
                 </form>
                 </div>
