@@ -11,9 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body id="">
+<body id="admin">
 <div class="panel">
     <h1>Hola Admin!</h1>
+    <input type="text" name="filtro" id="filtro">
     <table class="table" border="1">
         <thead class="thead-dark">
             <tr>
@@ -29,34 +30,34 @@
         <tbody>
             <?php
             include_once("../procesos/conexion.php");
-            $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido as apellido, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id";
+            $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido1 as apellido1, tbl_alumnos.apellido2 as apellido2, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id";
 
-// Obtener el número total de filas
-$result = mysqli_query($conn, $sql);
-$totalRows = mysqli_num_rows($result);
+            // Obtener el número total de filas
+            $result = mysqli_query($conn, $sql);
+            $totalRows = mysqli_num_rows($result);
 
-// Número de filas a mostrar por página
-$rowsPerPage = 8;
+            // Número de filas a mostrar por página
+            $rowsPerPage = 8;
 
-// Número total de páginas
-$totalPages = ceil($totalRows / $rowsPerPage);
+            // Número total de páginas
+            $totalPages = ceil($totalRows / $rowsPerPage);
 
-// Página actual (si no se especifica, se establece en la primera página)
-$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+            // Página actual (si no se especifica, se establece en la primera página)
+            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-// Calcular el punto de inicio para la consulta
-$startRow = ($currentPage - 1) * $rowsPerPage;
+            // Calcular el punto de inicio para la consulta
+            $startRow = ($currentPage - 1) * $rowsPerPage;
 
-// Consulta SQL con LIMIT para la paginación
-$sql .= " LIMIT $startRow, $rowsPerPage";
+            // Consulta SQL con LIMIT para la paginación
+            $sql .= " LIMIT $startRow, $rowsPerPage";
 
-$result = mysqli_query($conn, $sql);
+            $result = mysqli_query($conn, $sql);
 
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
-                    echo "<td>" . $row['nombre'] . " " . $row['apellido'] . "</td>";
+                    echo "<td>" . $row['nombre'] . " " . $row['apellido1'] . " " . $row['apellido2'] . "</td>";
                     echo "<td>" . $row['email'] . "</td>";
                     echo "<td>" . $row['pass'] . "</td>";
                     echo "<td>" . $row['telefono'] . "</td>";
