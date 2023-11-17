@@ -97,7 +97,11 @@
                                     }
                                     ?>
                                         <td>
+<<<<<<< HEAD
                                             <form action="mostrarNotas.php" method="post">
+=======
+                                            <form action="ver_nota.php" method="post">
+>>>>>>> 16e32878271b4e8ca8470b7c84b662f9ff8c33df
                                                 <input type="hidden" name="id" value="<?php echo $fila['id'] ?>">
                                                 <input type="hidden" name="id_curso" value="<?php echo $fila['curso'] ?>">
                                                 <input type="submit" name="envar" value="Mostrar" id="botonEditar">
