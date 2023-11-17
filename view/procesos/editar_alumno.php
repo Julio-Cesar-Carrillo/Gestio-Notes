@@ -27,7 +27,7 @@ include_once('./conexion.php');
     {
         mysqli_autocommit($conn, false);
         mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
-        $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido1 as apellido1, tbl_alumnos.apellido2 as apellido2, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id WHERE tbl_alumnos.id = ?";
+        $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido1 as apellido1, tbl_alumnos.apellido2 as apellido2, SUBSTRING_INDEX(tbl_alumnos.email, '@', 1) AS email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id WHERE tbl_alumnos.id = ?";
     
         $stmt = mysqli_prepare($conn, $sql);
     
@@ -86,16 +86,21 @@ include_once('./conexion.php');
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <label for="inputEmail4">Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email']; ?>">
-                    </div>
-                    <div class="form-group col-md-5">
                         <label for="inputEmail4">Contraseña</label>
                         <input type="text" class="form-control" name="pass" placeholder="Contraseña" value="<?php echo $row['pass']; ?>">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputEmail4">Teléfono</label>
                         <input type="text" class="form-control" name="telf" placeholder="Teléfono" value="<?php echo $row['telefono']; ?>">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputEmail4">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email']; ?>">
+                            </div>
+                            <div class="input-group-text">@contreras.com</div>
+                        </div>
                     </div>
                 </div>
                 
