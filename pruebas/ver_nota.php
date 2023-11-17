@@ -37,14 +37,6 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
     </div>
 
     <?php
-    // Consulta para contar la cantidad de asignaturas
-    $count_sql = "SELECT COUNT(DISTINCT id_asignatura) as asignaturas_count FROM tbl_notas WHERE id_alumno = ?";
-    $count_stmt = mysqli_prepare($conn, $count_sql);
-    mysqli_stmt_bind_param($count_stmt, "i", $alumno_id);
-    mysqli_stmt_execute($count_stmt);
-    $count_result = mysqli_stmt_get_result($count_stmt);
-    $asignaturas_count = mysqli_fetch_assoc($count_result)['asignaturas_count'];
-    mysqli_stmt_close($count_stmt);
 
     // Consulta para mostrar la tabla de los alumnos
     $sql = "SELECT N.*, A.nombre, A.apellido1, A.apellido2, M.nombre as 'asignatura' FROM tbl_notas N 
@@ -82,6 +74,7 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
                         echo "<tr>
                                     <input type='hidden' name='id' value='{$nota['id']}'>
                                     <td><label>{$nota["asignatura"]}</label></td>
+                                    <td><input>{$nota["asignatura"]}</input></td>
                                     <td><input type='text' value='{$nota["nota"]}'></td>
                                     <td><label>" . date("d/m/Y", strtotime($nota["fecha_registro"])) . "</label></td>
                                     <td><input type='submit' id='botonEditar' name='enviar' value='Editar'></td>
