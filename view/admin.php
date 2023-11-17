@@ -1,88 +1,129 @@
+<?php
+    session_start();
+
+    include('../procesos/conexion.php');
+
+    // Número de usuarios por página
+    $usuariosPorPagina = 10;
+
+    // Página actual, si no se proporciona, se asume la página 1
+    $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+
+    // Calcular el índice de inicio para la cláusula LIMIT
+    $inicio = ($paginaActual - 1) * $usuariosPorPagina;
+
+    // Búsqueda por nombre
+    $nombreBusqueda = isset($_GET['nombre']) ? $_GET['nombre'] : '';
+    $condicionNombre = !empty($nombreBusqueda) ? "WHERE a.nombre LIKE '%$nombreBusqueda%'" : '';
+
+    // Consulta para obtener el total de usuarios con el filtro de nombre
+    $totalUsuariosQuery = "SELECT COUNT(*) as total FROM tbl_alumnos a $condicionNombre";
+    $resultadoTotalUsuarios = mysqli_query($conn, $totalUsuariosQuery);
+    $totalUsuarios = mysqli_fetch_assoc($resultadoTotalUsuarios)['total'];
+
+    // Calcular el total de páginas
+    $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
+
+    // Consulta para obtener los usuarios de la página actual con el filtro de nombre
+    $contenidoTabla = "SELECT a.id ,a.nombre, a.apellido1, a.apellido2, a.email, c.nombre as curso FROM tbl_alumnos a LEFT JOIN tbl_cursos c ON a.id_curso = c.id 
+    $condicionNombre 
+    LIMIT $inicio, $usuariosPorPagina";
+    
+    $condicionNombre;
+    $resultadoContenidoTabla = mysqli_query($conn, $contenidoTabla);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de control</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- BOOSTRAP -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body id="admin">
-<div class="panel">
-    <h1>Hola Admin!</h1>
-    <input type="text" name="filtro" id="filtro">
-    <table class="table" border="1">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Nombre y Apellido/s</th>
-                <th scope="col">Email</th>
-                <th scope="col">Contraseña</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            include_once("../procesos/conexion.php");
-            $sql = "SELECT tbl_alumnos.id as id, tbl_alumnos.nombre as nombre, tbl_alumnos.apellido1 as apellido1, tbl_alumnos.apellido2 as apellido2, tbl_alumnos.email as email, tbl_alumnos.pass, tbl_alumnos.telefono, tbl_cursos.nombre as curso FROM `tbl_alumnos` INNER JOIN tbl_cursos ON tbl_alumnos.id_curso = tbl_cursos.id";
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- FONT AWESOME -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/estilosPrueba.css">
+        <!-- TITULO -->
+        <title>Página de pruebas estilos tabla.php</title>
+    </head>
 
-            // Obtener el número total de filas
-            $result = mysqli_query($conn, $sql);
-            $totalRows = mysqli_num_rows($result);
+    <body>
+        <div id="encabezado">
+            <div id="cont-logo">
+                <img src="../img/logo.png" id="logo">
+            </div>
 
-            // Número de filas a mostrar por página
-            $rowsPerPage = 8;
+            <div id="cont-filtro">
+                <form action="" method="get">
+                    <label for="nombre">Buscar por nombre:</label>
+                    <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombreBusqueda); ?>">
+                    <button type="submit" id="boton">Buscar</button>
+                    <?php if (!empty($nombreBusqueda)) : ?>
+                        <button class="eliminar-filtro"><a href="?pagina=1" class="eliminar-filtro">Eliminar Filtros</a></button>
+                    <?php endif; ?>
+                </form>
+            </div>
 
-            // Número total de páginas
-            $totalPages = ceil($totalRows / $rowsPerPage);
+            <div id="cont-texto">
+                <p>Hola</p>
+            </div>
+        </div>
+        
+        <div id="cont-tabla">
+            <table class="mi-tabla">
+                <thead>
+                    <tr>
+                        <th>Nº de lista</th>
+                        <th>Nombre</th>
+                        <th>1r Apellido</th>
+                        <th>2o Apellido</th>
+                        <th>Email</th>
+                        <th>Curso</th>
+                        <th>Notas</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
 
-            // Página actual (si no se especifica, se establece en la primera página)
-            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                <tbody>
+                    <?php
+                        if ($resultadoContenidoTabla) 
+                        {
+                            while ($fila = mysqli_fetch_assoc($resultadoContenidoTabla)) {    
+                                $id = $fila['id'];     
+                                echo "<tr>";
+                                    foreach ($fila as $valor) 
+                                    {
+                                        echo "<td>$valor</td>";
+                                    }
+                                    ?>
+                                        <td>
+                                            <form action="ver_nota.php" method="post">
+                                                <input type="hidden" name="id" value="<?php echo $fila['id'] ?>">
+                                                <input type="hidden" name="id_curso" value="<?php echo $fila['curso'] ?>">
+                                                <input type="submit" name="envar" value="Mostrar" id="botonEditar">
+                                            </form>
+                                        </td>
+                                        <td><a href='./procesos/editar_alumno.php?id=<?php echo $fila['id'] ?>'>Modificar</a></td>
+                                        <td><a href='./procesos/eliminar.php?id=<?php echo $fila['id'] ?>'>Eliminar</a></td>
+                                    <?php
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
-            // Calcular el punto de inicio para la consulta
-            $startRow = ($currentPage - 1) * $rowsPerPage;
-
-            // Consulta SQL con LIMIT para la paginación
-            $sql .= " LIMIT $startRow, $rowsPerPage";
-
-            $result = mysqli_query($conn, $sql);
-
-
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['nombre'] . " " . $row['apellido1'] . " " . $row['apellido2'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-                    echo "<td>" . $row['pass'] . "</td>";
-                    echo "<td>" . $row['telefono'] . "</td>";
-                    echo "<td>" . $row['curso'] . "</td>";
-                    echo "<td><a href='./procesos/editar_alumno.php?id=" . $row['id'] . "'>Modificar</a></td>";
-                    echo "<td><a href='./procesos/eliminar.php?id=" . $row['id'] . "'>Eliminar</a></td>";
-                    echo "</tr>";
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-
-    <!-- Paginación -->
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <?php
-            for ($i = 1; $i <= $totalPages; $i++) {
-                echo "<li class='page-item " . ($i == $currentPage ? 'active' : '') . "'>";
-                echo "<a class='page-link' href='?page=$i'>$i</a>";
-                echo "</li>";
-            }
-            ?>
-        </ul>
-    </nav>
-</div>
-</body>
+        <div id="cont-paginacion">
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $totalPaginas; $i++) : ?>
+                    <li <?php if ($i == $paginaActual) echo 'class="active"'; ?>>
+                        <a href="?pagina=<?= $i; ?>"><?= $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+            </ul>
+        </div>
+    </body>
 </html>
