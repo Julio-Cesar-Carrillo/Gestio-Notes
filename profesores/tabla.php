@@ -79,7 +79,7 @@
                         <th>1r Apellido</th>
                         <th>2o Apellido</th>
                         <th>Email</th>
-                        <th>Clase</th>
+                        <th>Curso</th>
                         <th>Notas</th>
                     </tr>
                 </thead>
