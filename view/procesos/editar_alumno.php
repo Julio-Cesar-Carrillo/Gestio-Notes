@@ -45,6 +45,10 @@ include_once('./conexion.php');
                 <form action="../../procesos/update.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-3">
+                        <?php
+                        if (isset($_GET['errorN'])) {
+                            echo "<p style='color: red;'>" . $_GET['errorN'] . "</p>";
+                        } ?>
                         <label for="inputEmail4">Nombre</label>
                         <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $row['nombre']; ?>">
                     </div>
@@ -74,7 +78,7 @@ include_once('./conexion.php');
                         $resultado2 = mysqli_stmt_get_result($stmt2);
                         if (mysqli_num_rows($resultado2) > 0) {
                         while ($row2 = mysqli_fetch_assoc($resultado2)) {
-                            if ($row["nombre"] === $curso) {
+                            if ($row2["nombre"] === $curso) {
                                 echo "<option value='" . $row2['id'] . "' selected>" . $row2['nombre'] . "</option>";     
                             }else {
                                 echo "<option value='" . $row2['id'] . "'>" . $row2['nombre'] . "</option>";     
@@ -101,6 +105,10 @@ include_once('./conexion.php');
                             </div>
                             <div class="input-group-text">@contreras.com</div>
                         </div>
+                        <?php
+                            if (isset($_GET['error'])) {
+                                echo "<p style='color: red;'>" . $_GET['error'] . "</p>";
+                            } ?>
                     </div>
                 </div>
                 
