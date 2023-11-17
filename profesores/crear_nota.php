@@ -1,13 +1,13 @@
 <?php
-if (!isset($_POST['id'])) {
+if (!isset($_POST['alumno'])) {
     header('location: ./tabla.php');
     exit();
 } else {
-    include_once("./procesos/conexion.php");
+    include_once("../procesos/conexion.php");
 
-    $alumno_id = $_POST['id'];
-    $id_curso=$_POST['id_asignatura'];
-    echo $id_curso;
+    $alumno_id = $_POST['alumno'];
+    $curso = $_POST['curso'];
+    echo $curso;
 
     $sql = "SELECT * FROM tbl_alumnos WHERE id=?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -30,17 +30,17 @@ if (!isset($_POST['id'])) {
         <h2>Creando nota para: <?php echo $datos_alumno['nombre']; ?></h2>
         <form action="./procesos/crear_nota.php" method="post">
             <input type="hidden" name="id" value="<?php echo $alumno_id; ?>">
-            <input type="hidden" name="id_asignatura" value="<?php echo $id_curso; ?>">
-            <p>Asignatura</p>
+            <input type="hidden" name="id_curso" value="<?php echo $curso; ?>">
+            <p>curso</p>
             <?php
-            $sqlSelectCurso = "SELECT * FROM tbl_asignaturas WHERE id_curso=$id_curso;";
+            $sqlSelectCurso = "SELECT * FROM tbl_cursos WHERE curso=$curso;";
             $resultadoSelectCurso = mysqli_query($conn, $sqlSelectCurso);
             echo "<select name='curso' id='curso' onchange='validarCurso(this)'>";
             echo "<option value='' selected> -- Escoge una opción -- </option>";
-            foreach ($resultadoSelectCurso as $asignatura){
-                        $curso = $asignatura['nombre'];
-                        $id_curso = $asignatura['id'];
-                        echo "<option value='$id_curso'>$curso</option>";
+            foreach ($resultadoSelectCurso as $curso) {
+                $curso = $curso['nombre'];
+                $curso = $curso['id'];
+                echo "<option value='$curso'>$curso</option>";
             }
             echo "</select>";
             ?>

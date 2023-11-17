@@ -1,5 +1,7 @@
 <?php
 $alumno_id = $_POST['id'];
+$curso = $_POST['id_curso'];
+
 include_once("../procesos/conexion.php");
 
 // Consulta para obtener el nombre y apellidos del alumno
@@ -94,7 +96,12 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
     ?>
         <div class="cont-botones">
             <div class="cont-botonAñadir">
-                <button class="botonAñadir"><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
+                <form action="crear_nota.php" method="post">
+                <input type='hidden' name='alumno' value='<?php echo $alumno_id;?>'>
+                <input type='hidden' name='curso' value='<?php echo $curso;?>'>
+                <button class="botonAñadir" type="submit">Añadir nota ahora</button>
+                </form>
+                
             </div>
 
             <div class="cont-botonVolver">
