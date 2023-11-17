@@ -74,13 +74,13 @@
             <table class="mi-tabla">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Nº de lista</th>
                         <th>Nombre</th>
                         <th>1r Apellido</th>
                         <th>2o Apellido</th>
                         <th>Email</th>
                         <th>Clase</th>
-                        <th>Editar</th>
+                        <th>Notas</th>
                     </tr>
                 </thead>
 
@@ -97,9 +97,10 @@
                                     }
                                     ?>
                                         <td>
-                                            <form action="editar.php" method="post">
+                                            <form action="mostrarNotas.php" method="post">
                                                 <input type="hidden" name="id" value="<?php echo $fila['id'] ?>">
-                                                <input type="submit" name="envar" value="Editar">
+                                                <input type="hidden" name="id_curso" value="<?php echo $fila['curso'] ?>">
+                                                <input type="submit" name="envar" value="Mostrar" id="botonEditar">
                                             </form>
                                         </td>
                                     <?php

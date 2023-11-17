@@ -80,7 +80,6 @@
             <button type="submit">Buscar</button>
         </form>
 
-<<<<<<< HEAD
 <body>
     <a href="./crear.php">Crear alumno</a>
     <table border=1>
@@ -102,7 +101,7 @@
               <td> {$alumno["pass"]} </td>
               <td> {$alumno["telefono"]} </td>
               <td> {$alumno["curso"]} </td>
-              <td><a href='./notas.php?id={$alumno['id']}&id_asignatura={$alumno["id_curso"]}'>notas</a>
+              <td><a href='./notas.php?id={$alumno['id']}&id_curso={$alumno["id_curso"]}'>notas</a>
               <td><a href='./editar_alumno.php?id={$alumno['id']}'>editar</a>
               <td><a href='./procesos/eliminar.php?id={$alumno['id']}'>aliminar</a>
               </tr>";
@@ -110,10 +109,6 @@
         ?>
     </table>
 </body>
-=======
-        <!-- Botón para eliminar filtros -->
-        <a href="?pagina=1">Eliminar Filtros</a>
->>>>>>> 61b4dd0534c869060960410f106df906298d484f
 
         <table border=1>
             <tr>

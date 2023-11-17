@@ -1,6 +1,6 @@
 <?php
 $alumno_id = $_GET['id'];
-$id_asignatura = $_GET['id_asignatura'];
+$id_asignatura = $_GET['id_curso'];
 include_once("./procesos/conexion.php");
 // Consulta para mostar la tabla de los alumnos
 $sql = "SELECT N.*, A.nombre as 'nombre', A.apellido as 'apellido' , M.nombre as 'asignatura' FROM tbl_notas N 

@@ -130,25 +130,32 @@ body
 
 #boton {
     padding: 8px 12px;
-    background-color: #4CAF50;
+    background-color: green;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-#boton:hover {
-    background-color: #45a049;
 }
 
 .eliminar-filtro {
     padding: 8px 12px;
-    background-color: rgb(233, 0, 0);
+    background-color: red;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    text-decoration: none;}
+    text-decoration: none;
+}
+
+#botonEditar  {
+    padding: 8px 12px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
 
 
 
