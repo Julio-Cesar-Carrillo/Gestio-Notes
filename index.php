@@ -1,7 +1,3 @@
-<?php
-    session_start();
-?>
-
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -35,7 +31,7 @@
                         <br>
                         <input type="text" id="email" name="nombre" oninput="validarEmail(this)" style="width:20vw; border: radius 5px;">
                         <br>
-                        <span id="email_error" class="error" style="color: white; font-weight: bolder;"></span>
+                        <span id="email_error" class="error" style="color: red; font-weight: bolder;"></span>
                     </div>
 
                     <div class="mb-3">
@@ -43,7 +39,7 @@
                         <br>
                         <input type="password" id="pwd" name="pwd" oninput="validarPwd(this)" style="width:20vw; border: radius 5px;">
                         <br>
-                        <span id="pwd_error" class="error" style="color: white; font-weight: bolder;"></span>
+                        <span id="pwd_error" class="error" style="color: red; font-weight: bolder;"></span>
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="background-color: #034b66; border-color: #023b56;" name="enviar" id="enviarButton" disabled>Enviar</button>
