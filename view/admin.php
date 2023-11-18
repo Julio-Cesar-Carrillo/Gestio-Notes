@@ -54,6 +54,10 @@
                 <img src="../img/logo.png" id="logo">
             </div>
 
+            <div id="cont-botonMedias">
+                <button class="botonMedias"><a href="../medias/medias.php">Medias</a></button>
+            </div>
+
             <div id="cont-filtro">
                 <form action="" method="get">
                     <label for="nombre">Buscar por nombre:</label>
