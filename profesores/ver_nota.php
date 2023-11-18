@@ -1,5 +1,7 @@
 <?php
 $alumno_id = $_POST['id'];
+$curso = $_POST['id_curso'];
+
 include_once("../procesos/conexion.php");
 
 // Consulta para obtener el nombre y apellidos del alumno
@@ -37,14 +39,6 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
     </div>
 
     <?php
-    // Consulta para contar la cantidad de asignaturas
-    $count_sql = "SELECT COUNT(DISTINCT id_asignatura) as asignaturas_count FROM tbl_notas WHERE id_alumno = ?";
-    $count_stmt = mysqli_prepare($conn, $count_sql);
-    mysqli_stmt_bind_param($count_stmt, "i", $alumno_id);
-    mysqli_stmt_execute($count_stmt);
-    $count_result = mysqli_stmt_get_result($count_stmt);
-    $asignaturas_count = mysqli_fetch_assoc($count_result)['asignaturas_count'];
-    mysqli_stmt_close($count_stmt);
 
     // Consulta para mostrar la tabla de los alumnos
     $sql = "SELECT N.*, A.nombre, A.apellido1, A.apellido2, M.nombre as 'asignatura' FROM tbl_notas N 
@@ -75,20 +69,22 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
             </thead>
 
             <tbody>
-                <form action="editar_nota.php" method="post">
-                    <?php
-                    // Resto del código sin cambios
-                    while ($nota = mysqli_fetch_assoc($result)) {
-                        echo "<tr>
-                                    <input type='hidden' name='id' value='{$nota['id']}'>
-                                    <td><label>{$nota["asignatura"]}</label></td>
-                                    <td><input type='text' value='{$nota["nota"]}'></td>
-                                    <td><label>" . date("d/m/Y", strtotime($nota["fecha_registro"])) . "</label></td>
-                                    <td><input type='submit' id='botonEditar' name='enviar' value='Editar'></td>
-                                </tr>";
-                    }
-                    ?>
-                </form>
+                <?php
+                // Resto del código sin cambios
+                foreach ($result as $nota) {
+                    echo "<form action='./editar_nota.php' method='post'>
+                            <tr>
+                                <input type='hidden' name='id' value='{$nota['id_alumno']}'>
+                                <td><label>{$nota["asignatura"]}</label></td>
+                                <input type='hidden' name='asignatura' value='{$nota['id_asignatura']}'>
+                                <td><input type='text' name='nota' value='{$nota["nota"]}'></td>
+                                <td><label>" . date("d/m/Y", strtotime($nota["fecha_registro"])) . "</label></td>
+                                <td><input type='submit' id='botonEditar' name='enviar' value='Editar'></td>
+                            </tr>
+                        </form>";
+                }
+                ?>
+
             </tbody>
         </table>
     </div>
@@ -97,22 +93,27 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
     // Verificar si hay menos de 3 asignaturas para mostrar el botón de "Añadir nota ahora"
     if (mysqli_num_rows($result) == 0) {
         echo "<p style='font-weight: bolder;'>No hay notas de este alumno.<p>";
-            ?>  
-            <div class="cont-botones">
-                <div class="cont-botonAñadir">
-                    <button class="botonAñadir"><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
-                </div>
-
-                <div class="cont-botonVolver">
-                    <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
-                </div>
+    ?>
+        <div class="cont-botones">
+            <div class="cont-botonAñadir">
+                <form action="crear_nota.php" method="post">
+                <input type='hidden' name='alumno' value='<?php echo $alumno_id;?>'>
+                <input type='hidden' name='curso' value='<?php echo $curso;?>'>
+                <button class="botonAñadir" type="submit">Añadir nota ahora</button>
+                </form>
+                
             </div>
 
-            <?php
+            <div class="cont-botonVolver">
+                <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
+            </div>
+        </div>
+
+    <?php
         exit();
     } elseif (mysqli_num_rows($result) == 1) {
         echo "<p>Aun faltan añadir 2 notas.<p>";
-        ?>  
+    ?>
         <div class="cont-botonAñadir">
             <button class="botonAñadir"><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
         </div>
@@ -120,11 +121,11 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
         <div class="cont-botonVolver">
             <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
         </div>
-        <?php
-    exit();
+    <?php
+        exit();
     } elseif (mysqli_num_rows($result) == 2) {
         echo "<p>Aun falta añadir 1 nota.<p>";
-        ?>  
+    ?>
         <div class="cont-botonAñadir">
             <button class="botonAñadir"><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
         </div>
@@ -133,18 +134,16 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
             <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
         </div>
 
-        <?php
-    exit();
-    }
-
-    elseif (mysqli_num_rows($result) == 3) {
-        ?>  
+    <?php
+        exit();
+    } elseif (mysqli_num_rows($result) == 3) {
+    ?>
         <div class="cont-botonVolver">
             <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
         </div>
 
-        <?php
-    exit();
+    <?php
+        exit();
     }
     ?>
 </body>
