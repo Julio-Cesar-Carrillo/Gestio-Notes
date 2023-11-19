@@ -27,7 +27,7 @@
     $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 
     // Consulta para obtener los usuarios de la página actual con el filtro de nombre
-    $contenidoTabla = "SELECT a.id ,a.nombre, a.apellido1, a.apellido2, a.email, c.nombre as curso FROM tbl_alumnos a LEFT JOIN tbl_cursos c ON a.id_curso = c.id 
+    $contenidoTabla = "SELECT a.id ,a.nombre, a.apellido1, a.apellido2, a.email, c.nombre as curso, c.id as id_curso FROM tbl_alumnos a LEFT JOIN tbl_cursos c ON a.id_curso = c.id 
     $condicionNombre 
     LIMIT $inicio, $usuariosPorPagina";
     
@@ -110,16 +110,16 @@
                             while ($fila = mysqli_fetch_assoc($resultadoContenidoTabla)) {    
                                 $id = $fila['id'];     
                                 echo "<tr>";
-                                    foreach ($fila as $valor) 
-                                    {
-                                        echo "<td>$valor</td>";
+                                    foreach ($fila as $nombreCampo => $valor) {
+                                        if ($nombreCampo != 'id_curso') {
+                                            echo "<td>$valor</td>";
+                                        }
                                     }
                                     ?>
                                         <td>
                                             <form action="ver_nota.php" method="post">
                                                 <input type="hidden" name="id" value="<?php echo $fila['id'] ?>">
-                                                <input type="hidden" name="id_curso" value="<?php echo $fila['curso'] ?>">
-
+                                                <input type="hidden" name="id_curso" value="<?php echo $fila['id_curso'] ?>">
                                                 <input type="submit" name="envar" value="Mostrar" id="botonEditar">
                                             </form>
                                         </td>

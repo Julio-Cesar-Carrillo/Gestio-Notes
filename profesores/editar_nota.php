@@ -9,6 +9,7 @@ if (!isset($_POST['enviar'])) {
     $alumno = $_POST['id'];
     $asignatura = $_POST['asignatura'];
     $nota = $_POST['nota'];
+    $id_curso = $_POST['id_curso'];
     // echo $alumno . "<br>";
     // echo $asignatura . "<br>";
     // echo $nota . "<br>";
@@ -35,7 +36,7 @@ if (!isset($_POST['enviar'])) {
 
         echo '<form id="redirectForm" action="./ver_nota.php" method="post">';
         echo '<input type="hidden" name="id" value="' . htmlspecialchars($alumno) . '">';
-        echo '<input type="hidden" name="id" value="' . htmlspecialchars($alumno) . '">';
+        echo '<input type="hidden" name="id_curso" value="' . htmlspecialchars($id_curso) . '">';
         echo '</form>';
 
         // Script para enviar automáticamente el formulario al cargar la página
