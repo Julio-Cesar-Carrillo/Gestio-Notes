@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    $user = $_SESSION['nombre'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,9 +35,6 @@
         <h1 id="texto-header">Notas medias</h1>
     </div>
     <?php
-    session_start();
-    $user = $_SESSION['nombre'];
-
     include('../procesos/conexion.php');
 
     // Número de resultados por página
@@ -46,25 +47,16 @@
     $offset = ($paginaActual - 1) * $resultadosPorPagina;
     $offset = max($offset, 0); // Ajustar el offset si es menor que cero
 
-    // Crear la consulta SQL con una sentencia preparada
+    // Crear la consulta SQL
     $sql = "SELECT a.nombre, a.apellido1, a.apellido2, COALESCE(ROUND(AVG(n.nota), 2), 0) AS media 
             FROM tbl_alumnos a 
             LEFT JOIN tbl_notas n ON a.id = n.id_alumno 
             GROUP BY a.nombre, a.apellido1, a.apellido2 
             ORDER BY media DESC
-            LIMIT ?, ?;";
+            LIMIT $offset, $resultadosPorPagina;";
 
-    // Preparar la consulta
-    $stmt = mysqli_prepare($conn, $sql);
-
-    // Vincular parámetros
-    mysqli_stmt_bind_param($stmt, "ii", $offset, $resultadosPorPagina);
-
-    // Ejecutar la consulta preparada
-    mysqli_stmt_execute($stmt);
-
-    // Obtener el resultado de la consulta
-    $result = mysqli_stmt_get_result($stmt);
+    // Ejecutar la consulta
+    $result = mysqli_query($conn, $sql);
 
     // Verificar errores en la consulta
     if (!$result) {
@@ -127,15 +119,34 @@
     $condicionNombre 
     LIMIT $inicio, $usuariosPorPagina";
 
-    $condicionNombre;
     $resultadoContenidoTabla = mysqli_query($conn, $contenidoTabla);
-
-    // Cerrar la conexión
-    mysqli_close($conn);
     ?>
-    <div class="cont-botonVolver">
-        <button class="botonVolver"><a href='../profesores/tabla.php'>Volver</a></button>
-    </div>
+
+    <?php
+    $user = $_SESSION['nombre'];
+
+    $sql = "SELECT * FROM tbl_profesores WHERE email = '$user'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+    ?>
+        <div class="cont-botonVolver">
+            <button class="botonVolver"><a href='../profesores/tabla.php'>Volver</a></button>
+        </div>
+    <?php
+    } else {
+        $sql = "SELECT * FROM tbl_administradores WHERE email = '$user'";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+    ?>
+            <div class="cont-botonVolver">
+                <button class="botonVolver"><a href='../view/admin.php'>Volver</a></button>
+            </div>
+    <?php
+        }
+    }
+    ?>
 
     <div id="cont-paginacion">
         <ul class="pagination">

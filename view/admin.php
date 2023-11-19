@@ -1,10 +1,11 @@
 <?php
     session_start();
+    $user = $_SESSION['nombre'];
 
     include('../procesos/conexion.php');
 
     // Número de usuarios por página
-    $usuariosPorPagina = 10;
+    $usuariosPorPagina = 7;
 
     // Página actual, si no se proporciona, se asume la página 1
     $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
@@ -41,6 +42,13 @@
         <!-- FONT AWESOME -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Estilos BootStrap -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"> 
+        <!-- Scripts BootStrap -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <!-- CSS -->
         <link rel="stylesheet" href="../css/estilosPrueba.css">
@@ -69,8 +77,14 @@
                 </form>
             </div>
 
-            <div id="cont-texto">
-                <p>Hola</p>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?php echo "Hola " . $user ?>
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align: center;">
+                    <button class="botonCerrar"><a href="../view/cerrarSesion.php">Cerrar Sesión</a></button>
+                </div>
             </div>
         </div>
         
