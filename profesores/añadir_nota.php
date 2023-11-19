@@ -5,13 +5,7 @@ try {
     $asignatura = $_POST["id_asignatura"];
     $id_curso = $_POST["id_curso"];
     $nota = $_POST["nota"];
-
-    // echo $alumno_id . "<br>";
-    // echo $asignatura . "<br>";
-    // echo $id_curso . "<br>";
-    // echo $nota . "<br>";
-    // die();
-
+    
     include_once("../procesos/conexion.php");
     mysqli_autocommit($conn, false);
     mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
