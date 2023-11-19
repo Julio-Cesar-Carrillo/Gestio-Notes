@@ -1,7 +1,6 @@
 <?php
 // var_dump($_POST); // Agrega esta línea para depurar
 $alumno_id = $_POST['id'];
-$curso = $_POST['id_curso'];
 include_once("../procesos/conexion.php");
 
 // Consulta para obtener el nombre y apellidos del alumno
@@ -48,7 +47,7 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "i", $alumno_id);
     mysqli_stmt_execute($stmt);
-    
+
     // Verificar si la consulta fue exitosa
     if (!$stmt) {
         die('Error en la consulta SQL: ' . mysqli_error($conn));
@@ -77,19 +76,22 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
                 </thead>
 
                 <tbody>
-                    <form action='./editar_nota.php' method='post'>
-                        <?php foreach ($result as $nota) : ?>
+                    <?php
+                    // Resto del código sin cambios
+                    foreach ($result as $nota) {
+                        echo "<form action='./editar_nota.php' method='post'>
                             <tr>
-                                <input type='hidden' name='id' value='<?php echo $nota['id_alumno']; ?>'>
-                                <input type='hidden' name='id_curso' value='<?php echo $curso; ?>'>
-                                <td><label><?php echo $nota["asignatura"]; ?></label></td>
-                                <input type='hidden' name='asignatura' value='<?php echo $nota['id_asignatura']; ?>'>
-                                <td><input type='text' name='nota' value='<?php echo $nota["nota"]; ?>'></td>
-                                <td><label><?php echo date("d/m/Y", strtotime($nota["fecha_registro"])); ?></label></td>
+                                <input type='hidden' name='id' value='{$nota['id_alumno']}'>
+                                <td><label>{$nota["asignatura"]}</label></td>
+                                <input type='hidden' name='asignatura' value='{$nota['id_asignatura']}'>
+                                <td><input type='text' name='nota' value='{$nota["nota"]}'></td>
+                                <td><label>" . date("d/m/Y", strtotime($nota["fecha_registro"])) . "</label></td>
                                 <td><input type='submit' id='botonEditar' name='enviar' value='Editar'></td>
                             </tr>
-                        <?php endforeach; ?>
-                    </form>
+                        </form>";
+                    }
+                    ?>
+
                 </tbody>
             </table>
         </div>
