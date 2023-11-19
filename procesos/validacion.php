@@ -10,7 +10,8 @@
     // Si se ha enviado un valor para 'pass', lo almacenamos en una variable de sesión llamada 'pass'
     if (isset($_POST['pwd'])) 
     {
-        $pass = $_POST['pwd'];
+        $pass2 = $_POST['pass'];
+        $pass = hash("sha256", $pass2);
         $_SESSION['pwd'] = $pass;
     }
 
