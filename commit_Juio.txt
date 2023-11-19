@@ -1,0 +1,155 @@
+commit aeee39e04049a434e93d158028d8bd573cf62ef5
+Merge: a977d8f 22fc7a2
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 17 18:37:28 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit a977d8f8ae576f3f5a6ad42eb2ab8ffb774561bc
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 17 18:37:19 2023 +0100
+
+    crear nota
+
+commit 112297801fb2d8fe0573c0df8f0356aed57135d1
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 17 18:04:09 2023 +0100
+
+    Cambios en editar nota
+
+commit 8a774654fa5919624c84aeed4bf26faf53c6918b
+Merge: 137eba6 84e0619
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 17 17:37:55 2023 +0100
+
+    Editar notas
+
+commit 137eba6e802ca4aef777c4aa627550a54e19e6a6
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 17 17:37:15 2023 +0100
+
+    Cambios editar notas
+
+commit 16e32878271b4e8ca8470b7c84b662f9ff8c33df
+Merge: 144d859 e55a4ea
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 16 18:41:23 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 144d859c550d756758d5e480c2d01120f009248e
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 16 18:41:15 2023 +0100
+
+    Editar
+
+commit 99a806b59bb1771d938bc2fba4232728ee649fa8
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 16 18:28:55 2023 +0100
+
+    cambios ruta y nombre de notas, antes editar ahora ver_nota.php
+
+commit 225bb6dc9312ca54e0ac0e10d4c9d6bc9730d517
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 16 18:25:17 2023 +0100
+
+    Cambios ver nota
+
+commit 6e749378a64d708df1bb000f79b52d542c93de76
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 16 18:23:05 2023 +0100
+
+    Cambios editar nota
+
+commit 80060f8bf72f5ca16ef26bbd430c9131a9dd3a36
+Merge: 6fa0b83 61b4dd0
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 16 16:12:00 2023 +0100
+
+    Arreglo filtro alumno
+
+commit 6fa0b83969061ef14347e7c5df5e4500e8a1881f
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 16 16:06:47 2023 +0100
+
+    Editar notas
+
+commit d3c1417da0188b2191df2579489b005245d801ba
+Merge: 851da3a 7d994e9
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 10 18:11:30 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 851da3a558a4ef7ec827019c99249571df8b2444
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 10 18:11:21 2023 +0100
+
+    notas.php 5 materias con nota necesaria
+
+commit 54cb8ab9d3198e1d59a395810daa9c6d328cf39e
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 10 17:41:11 2023 +0100
+
+    subida crear.php
+
+commit 87f29fc9cf5cbb1030deef7a3ef4965044ee3335
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 10 17:37:45 2023 +0100
+
+    Subida base de datos
+
+commit f8e087fc00ef994556a946d7dc066513fcd285e0
+Merge: 05ea2b2 b7b3cfe
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 10 16:58:29 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 05ea2b2447fce93a042de8804a80112d96778ad7
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Fri Nov 10 16:58:17 2023 +0100
+
+    modificaciones editar nota, crear alumno, añadir nota
+
+commit 552e0cace732cf24812b70ec51ac9f2e5cb588f9
+Merge: 56d092a 68b84e9
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 9 18:00:29 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 56d092a484987cfe206ee055f87b3d34ee2aefed
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Thu Nov 9 18:00:15 2023 +0100
+
+    Inner joins a las tablas, modificar editar, notas 09-11-2023 18:00
+
+commit 705e812321be3495e6f9221a14a9ab0615d59756
+Merge: c05c942 da1a9cd
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Wed Nov 8 20:55:49 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit c05c9429cc046847d0c5b5f3bb73ca40af61b2d4
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Wed Nov 8 20:55:47 2023 +0100
+
+    ver notas
+
+commit 3df2e5a28816cb407acdaf3f5682f57dcca3ca24
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Wed Nov 8 19:20:42 2023 +0100
+
+    mejoras base de datos, crear usuario, crear alumno, eliminar 08-11-2023 19:20
+
+commit 21b9f4f2f3b8288d2e28d9b5964b994e1d8fead3
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Wed Nov 8 17:06:16 2023 +0100
+
+    subida BD, tablas y eliminar
+
+commit f3382392d9770e98e8adb0ced40ffbff3951988d
+Author: unknown <Julio-Cesar-Carrillo>
+Date:   Tue Nov 7 19:23:15 2023 +0100

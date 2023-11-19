@@ -1,0 +1,186 @@
+commit 6ba6ea9c4206a262f73234af7e239ca11650cc41
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Sun Nov 19 18:41:50 2023 +0100
+
+    Cambios en redirección en página medias
+
+commit 0c82f76b7098f292e800b4bf8446c90d5a1186b5
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Sun Nov 19 18:22:32 2023 +0100
+
+    arreglo eliminar
+
+commit 82a9b4283d27102bc2e024f7fee8e43fa2f33b0f
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Sat Nov 18 17:52:11 2023 +0100
+
+    notas medias , redirección admin
+
+commit f33c4b6a012523aab637ec80833dfc5f765ddad3
+Merge: 1f9e60e aeee39e
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Sat Nov 18 17:50:21 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 1f9e60e8307b932ce2fced8fde0392b827db6442
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Sat Nov 18 17:50:11 2023 +0100
+
+    notas medias
+
+commit 84e0619cde52f03aca75f78226259e9056080ede
+Merge: 411786a 505ff6b
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 17 17:36:22 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 411786a61c90967abfc51f9d5c60ec8a0ba95684
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 17 17:36:14 2023 +0100
+
+    Cambio nombre carpeta pruebas a profesores - 17.11.2023
+
+commit dd9990a4133a205e6abcd5d31183195e7ba61c5c
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 17 17:21:57 2023 +0100
+
+    Cambios generales con ayuda de Julio - 17.11.2023
+
+commit dac04ff8a1f5791e6291cd1c4648c974ad6e782f
+Merge: 772540e 16e3287
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 17 15:40:43 2023 +0100
+
+    Cambios varios
+
+commit 772540e18a9c71ccb8e380357574d6601eb4a713
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 17 15:39:43 2023 +0100
+
+    Cambios varios
+
+commit a11f5a673c4b21ec2aee91b6e25b0b7b12387a49
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 16 18:07:55 2023 +0100
+
+    arreglos en tabla.php
+
+commit 61b4dd0534c869060960410f106df906298d484f
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 16 15:58:26 2023 +0100
+
+    Cambio BBDD > tbl_alumnos, adición columna apellido2 - 16.11.2023
+
+commit cb9a91d38d2eabca87f95e486345fab32dd66bf9
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 16 15:57:11 2023 +0100
+
+    Pruebas estilos tabla vista profesor
+
+commit e0014d6217d8c27a9fa6dde838a9b680a71faae6
+Merge: 34f103f d608325
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Tue Nov 14 20:47:40 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 34f103f57f742873995b241504181b656f74a81e
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Tue Nov 14 20:47:31 2023 +0100
+
+    Validación repetición correo electrónico y número de teléfono - 14.11.2023
+
+commit 6e46531fa286a80bb29dc7537c73cebd3a14962b
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 10 18:13:46 2023 +0100
+
+    Cambios en cursos de db_gestionotes.sql
+
+commit 7d994e9a132c834d3378614277fd6a87dd96f71a
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 10 18:10:50 2023 +0100
+
+    editar_alumno.php validado 10.11.2023
+
+commit 4dbd51d1cc4844ae7aefd55aa36f0a50ae3d2aa0
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 10 17:37:12 2023 +0100
+
+    A tomar por culo la Base de Datos - 10.11.2023
+
+commit bd98f36cba854270194e03650f8f020f9dca9ce1
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Fri Nov 10 17:34:43 2023 +0100
+
+    No sé xD
+
+commit ded28ec2231e6405e661547ec2fc5420f8390e24
+Merge: f11b892 552e0ca
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 9 18:27:14 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit f11b89229c6694e7c5f36e3a90f237d51a904236
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 9 18:27:06 2023 +0100
+
+    Arreglos en la selección de curso.php - 09.11.2023
+
+commit ef2e8d3dc1080b8a9dbfe340fea09b4972af7c4a
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 9 17:59:13 2023 +0100
+
+    Cambios en crear.php - 09.11.2023
+
+commit baa8ec2d68eb36ec66edb0c96594306bc5c752cc
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 9 10:09:48 2023 +0100
+
+    Cambios varios - 09.11.2023
+
+commit 97405a1ea74ceda67eebc59b51ef103f43cebc5d
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 9 10:06:23 2023 +0100
+
+    Cambios en index.php - 09.11.2023
+
+commit 393fc0a0b545d6d96529d083bc64e737cbc1e714
+Merge: 28fc697 705e812
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 9 10:05:44 2023 +0100
+
+    Cambios en las validaciones del login y de crear.php - 09.11.2023
+
+commit 28fc697f5282775337b44ecb8c4f7ac2da2263b9
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Thu Nov 9 10:04:45 2023 +0100
+
+    Cambios en las validaciones del login y de crear.php - 09.11.2023
+
+commit 2ca29990fca24afe256864281e0c1b99bbb3aef5
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Wed Nov 8 20:55:09 2023 +0100
+
+    Arreglos en crear.php - 08.11.2023
+
+commit b0b8feba146963af631af77efc8ebb9d737d0b58
+Merge: 7298270 0bedb75
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Wed Nov 8 20:46:08 2023 +0100
+
+    Merge branch 'main' of https://github.com/Julio-Cesar-Carrillo/Gestio-Notes
+
+commit 729827095b2065701568e9ef3dc71d57223d3b7a
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Wed Nov 8 20:45:59 2023 +0100
+
+    Validación de los campos en crear.php + El botón se activa cuando todos los campos están completos - 08.11.2023
+
+commit 7964d9a44f1837d04422b1873be5500a678b08e2
+Author: IkerCG2003 <100007043.joan23@fje.edu>
+Date:   Wed Nov 8 20:08:51 2023 +0100
+
+    Validación crear.php - 08.11.2023
