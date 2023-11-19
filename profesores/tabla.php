@@ -119,6 +119,7 @@
                                             <form action="ver_nota.php" method="post">
                                                 <input type="hidden" name="id" value="<?php echo $fila['id'] ?>">
                                                 <input type="hidden" name="id_curso" value="<?php echo $fila['curso'] ?>">
+
                                                 <input type="submit" name="envar" value="Mostrar" id="botonEditar">
                                             </form>
                                         </td>

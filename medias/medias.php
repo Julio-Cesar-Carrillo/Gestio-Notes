@@ -23,52 +23,6 @@
         .media-alta {
             background-color: lightgreen;
         }
-
-        .cont-botonVolver {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 999;
-        }
-
-        .botonVolver {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        #cont-paginacion {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .pagination-row {
-            margin-top: 20px;
-        }
-
-        .pagination li {
-            display: inline;
-            margin-right: 5px;
-        }
-
-        .pagination li a {
-            text-decoration: none;
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            background-color: #f2f2f2;
-            color: #333;
-            border-radius: 10px;
-        }
-
-        .pagination li.active a {
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 10px;
-        }
     </style>
 </head>
 

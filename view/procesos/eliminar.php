@@ -24,7 +24,7 @@ try {
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 
-    header('Location: ../tabla.php');
+    header('Location: ../admin.php');
 } catch (Exception $e) {
     // Deshacemos las inserciones en el caso de que se genere alguna excepción
     echo "Error: no se encuentra ". $e->getMessage() ."";

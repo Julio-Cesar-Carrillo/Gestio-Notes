@@ -1,7 +1,7 @@
 <?php
+// var_dump($_POST); // Agrega esta línea para depurar
 $alumno_id = $_POST['id'];
 $curso = $_POST['id_curso'];
-
 include_once("../procesos/conexion.php");
 
 // Consulta para obtener el nombre y apellidos del alumno
@@ -48,8 +48,15 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "i", $alumno_id);
     mysqli_stmt_execute($stmt);
+    
+    // Verificar si la consulta fue exitosa
+    if (!$stmt) {
+        die('Error en la consulta SQL: ' . mysqli_error($conn));
+    }
+
     // Guardamos los datos de la consulta
     $result = mysqli_stmt_get_result($stmt);
+
     // Cerramos la consulta
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
@@ -57,95 +64,52 @@ $nombre_apellidos = $alumno_info['nombre'] . ' ' . $alumno_info['apellido1'] . '
     // Imprimir el nombre y apellidos fuera de la tabla
     ?>
 
-    <div class="cont-tabla">
-        <table class="mi-tabla">
-            <thead>
-                <tr>
-                    <th>Asignatura</th>
-                    <th>Nota</th>
-                    <th>Fecha registro</th>
-                    <th>Editar</th>
-                </tr>
-            </thead>
+    <?php if (mysqli_num_rows($result) > 0) : ?>
+        <div class="cont-tabla">
+            <table class="mi-tabla">
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>Nota</th>
+                        <th>Fecha registro</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <?php
-                // Resto del código sin cambios
-                foreach ($result as $nota) {
-                    echo "<form action='./editar_nota.php' method='post'>
+                <tbody>
+                    <form action='./editar_nota.php' method='post'>
+                        <?php foreach ($result as $nota) : ?>
                             <tr>
-                                <input type='hidden' name='id' value='{$nota['id_alumno']}'>
-                                <td><label>{$nota["asignatura"]}</label></td>
-                                <input type='hidden' name='asignatura' value='{$nota['id_asignatura']}'>
-                                <td><input type='text' name='nota' value='{$nota["nota"]}'></td>
-                                <td><label>" . date("d/m/Y", strtotime($nota["fecha_registro"])) . "</label></td>
+                                <input type='hidden' name='id' value='<?php echo $nota['id_alumno']; ?>'>
+                                <input type='hidden' name='id_curso' value='<?php echo $curso; ?>'>
+                                <td><label><?php echo $nota["asignatura"]; ?></label></td>
+                                <input type='hidden' name='asignatura' value='<?php echo $nota['id_asignatura']; ?>'>
+                                <td><input type='text' name='nota' value='<?php echo $nota["nota"]; ?>'></td>
+                                <td><label><?php echo date("d/m/Y", strtotime($nota["fecha_registro"])); ?></label></td>
                                 <td><input type='submit' id='botonEditar' name='enviar' value='Editar'></td>
                             </tr>
-                        </form>";
-                }
-                ?>
-
-            </tbody>
-        </table>
-    </div>
-
-    <?php
-    // Verificar si hay menos de 3 asignaturas para mostrar el botón de "Añadir nota ahora"
-    if (mysqli_num_rows($result) == 0) {
-        echo "<p style='font-weight: bolder;'>No hay notas de este alumno.<p>";
-    ?>
+                        <?php endforeach; ?>
+                    </form>
+                </tbody>
+            </table>
+        </div>
+    <?php else : ?>
+        <p style='font-weight: bolder;'>No hay notas de este alumno.</p>
         <div class="cont-botones">
             <div class="cont-botonAñadir">
                 <form action="crear_nota.php" method="post">
-                <input type='hidden' name='alumno' value='<?php echo $alumno_id;?>'>
-                <input type='hidden' name='curso' value='<?php echo $curso;?>'>
-                <button class="botonAñadir" type="submit">Añadir nota ahora</button>
+                    <input type='hidden' name='alumno' value='<?php echo $alumno_id; ?>'>
+                    <input type='hidden' name='curso' value='<?php echo $curso; ?>'>
+                    <button class="botonAñadir" type="submit">Añadir nota ahora</button>
                 </form>
-                
             </div>
 
             <div class="cont-botonVolver">
                 <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
             </div>
         </div>
+    <?php endif; ?>
 
-    <?php
-        exit();
-    } elseif (mysqli_num_rows($result) == 1) {
-        echo "<p>Aun faltan añadir 2 notas.<p>";
-    ?>
-        <div class="cont-botonAñadir">
-            <button class="botonAñadir"><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
-        </div>
-
-        <div class="cont-botonVolver">
-            <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
-        </div>
-    <?php
-        exit();
-    } elseif (mysqli_num_rows($result) == 2) {
-        echo "<p>Aun falta añadir 1 nota.<p>";
-    ?>
-        <div class="cont-botonAñadir">
-            <button class="botonAñadir"><a href='./crear_nota.php?id={$alumno_id}'>Añadir nota ahora</a></button>
-        </div>
-
-        <div class="cont-botonVolver">
-            <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
-        </div>
-
-    <?php
-        exit();
-    } elseif (mysqli_num_rows($result) == 3) {
-    ?>
-        <div class="cont-botonVolver">
-            <button class="botonVolver"><a href='./tabla.php'>Volver</a></button>
-        </div>
-
-    <?php
-        exit();
-    }
-    ?>
 </body>
 
 </html>
